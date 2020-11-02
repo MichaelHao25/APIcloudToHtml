@@ -31,7 +31,19 @@ function apiadapter(payload) {
     @return: 不作处理.如果不想处理某个模块方法, 应该显式返回字符串 'TO_NEXT_API_ADAPTER',
     以便往上传播调用.
     */
-    //    console.dir(payload);
+    console.log('method:', payload.method);
+    console.log('moduleName:', payload.moduleName);
+    if (payload.moduleName === 'UILoading') {
+        if (payload.method == 'closeFlower') {
+            window.loadingHide();
+        } else {
+            window.loadingShow();
+        }
+    }
+
+    // loadingShow();
+    // closeFlower
+    // flower
     /* 默认不作处理. */
     let whiteArray = ['api']
     if (whiteArray.includes(payload.moduleName)) {
@@ -41,6 +53,94 @@ function apiadapter(payload) {
 }
 
 
+// loading plugs
+(() => {
+    const html = `
+    <div class="loading-dshkfhdsohls">
+<div class="loading-dshkfhdsohls-container">
+    <div class="loading-dshkfhdsohls-container-bar"></div>
+</div>
+</div>
+    `
+    const style = `
+    <style>
+    .loading-dshkfhdsohls {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: none;
+        z-index:100;
+        background:rgba(0,0,0,.3)
+    }
+
+    .loading-dshkfhdsohls-container {
+        width: 100%;
+        height: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+
+    .loading-dshkfhdsohls-container-bar {
+        width: 40px;
+        height: 40px;
+        border: 1px solid transparent;
+        border-left-color: #ccc;
+        border-radius: 50%;
+        -webkit-animation: loading_dshkfhdsohls_container_bar 1s infinite linear;
+        animation: loading_dshkfhdsohls_container_bar 1s infinite linear;
+    }
+
+    @-webkit-keyframes loading_dshkfhdsohls_container_bar {
+        from {
+            -webkit-transform: rotate(0);
+            transform: rotate(0);
+        }
+
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes loading_dshkfhdsohls_container_bar {
+        from {
+            -webkit-transform: rotate(0);
+            transform: rotate(0);
+        }
+
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+</style>
+    `
+    const div = document.createElement('div');
+    div.innerHTML = html + style;
+    document.body.appendChild(div);
+    const loading = document.querySelector('.loading-dshkfhdsohls');
+    function loadingShow() {
+        loading.style.display = 'block';
+    }
+
+    function loadingHide() {
+        loading.style.display = 'none';
+    }
+    window.loadingHide = loadingHide;
+    window.loadingShow = loadingShow;
+    // loadingShow();
+    // closeFlower
+    // flower
+})();
 
 
 (function (window) {
