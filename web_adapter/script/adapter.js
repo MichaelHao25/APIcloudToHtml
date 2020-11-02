@@ -771,6 +771,7 @@
                 ve.name = Ne,
                 ve.style.width = "100%",
                 ve.style.height = "100%",
+                // ve.style.height = We.style.height,
                 ve.style.background = ne,
                 ve.frameBorder = 0,
                 We.appendChild(ve),

@@ -72,7 +72,7 @@ function apiadapter(payload) {
         right: 0;
         display: none;
         z-index:100;
-        background:rgba(0,0,0,.3)
+        // background:rgba(0,0,0,.3)
     }
 
     .loading-dshkfhdsohls-container {
@@ -93,7 +93,7 @@ function apiadapter(payload) {
         width: 40px;
         height: 40px;
         border: 1px solid transparent;
-        border-left-color: #ccc;
+        border-left-color: #666;
         border-radius: 50%;
         -webkit-animation: loading_dshkfhdsohls_container_bar 1s infinite linear;
         animation: loading_dshkfhdsohls_container_bar 1s infinite linear;
