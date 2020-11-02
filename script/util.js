@@ -97,7 +97,7 @@
             });
         }
         return new Promise(function (resolve, reject) {
-            console.log(obj);
+            // console.log(obj);
             // var xhr = new XMLHttpRequest();
             // xhr.open("POST", obj.url, true);
             // // for (const key in obj.headers) {

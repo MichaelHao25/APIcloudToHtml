@@ -4,7 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui-flex.css" />
@@ -54,24 +55,24 @@
             padding: 0rem;
         }
 
-         ::-webkit-input-placeholder {
+        ::-webkit-input-placeholder {
             /* WebKit browsers */
-            color: #666666!important;
+            color: #666666 !important;
         }
 
-         :-moz-placeholder {
+        :-moz-placeholder {
             /* Mozilla Firefox 4 to 18 */
-            color: #666666!important;
+            color: #666666 !important;
         }
 
-         ::-moz-placeholder {
+        ::-moz-placeholder {
             /* Mozilla Firefox 19+ */
-            color: #666666!important;
+            color: #666666 !important;
         }
 
-         :-ms-input-placeholder {
+        :-ms-input-placeholder {
             /* Internet Explorer 10+ */
-            color: #666666!important;
+            color: #666666 !important;
         }
 
         .aui-searchbar {
@@ -253,6 +254,7 @@
             font-size: 14px;
             justify-content: space-between;
         }
+
         .test-version-popup {
             width: 18.75rem;
             height: 22.5rem;
@@ -261,14 +263,15 @@
             left: 50%;
             z-index: 999;
             margin-left: -9.375rem;
-            margin-top:-11.25rem;
-          }
-          .test-version-popup image{
+            margin-top: -11.25rem;
+        }
+
+        .test-version-popup image {
             width: 100%;
             height: 100%;
-          }
+        }
 
-          .mask {
+        .mask {
             position: fixed;
             top: 0;
             left: 0;
@@ -276,8 +279,9 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.3);
             z-index: 99;
-          }
-          .test-version-ok{
+        }
+
+        .test-version-ok {
             position: absolute;
             width: 7rem;
             height: 2.35rem;
@@ -286,8 +290,9 @@
             background-color: transparent;
             z-index: 1000;
             border-radius: 1rem
-          }
-          .test-version-close{
+        }
+
+        .test-version-close {
             position: absolute;
             width: 2.25rem;
             height: 2.25rem;
@@ -296,26 +301,31 @@
             top: 20rem;
             left: 8.75rem;
             z-index: 1000;
-          }
-          [v-cloak]{
+        }
+
+        [v-cloak] {
             display: none;
-          }
-          .menu-img{
+        }
+
+        .menu-img {
             width: 80%;
             margin: 0px auto;
-          }
-          .limited-time span{
+        }
+
+        .limited-time span {
             background-color: #1b1b1b;
             padding: 0.2rem;
-            color:#fff;
-          }
-          .limited .owl-item img.icon{
+            color: #fff;
+        }
+
+        .limited .owl-item img.icon {
             max-width: 5rem;
             display: inline;
-          }
-          .discountTime span{
+        }
+
+        .discountTime span {
             padding: 0.1rem;
-          }
+        }
     </style>
     <!-- <script type='text/javascript' src='https://webchat.7moor.com/javascripts/7moorInit.js?accessId=6df22850-6fae-11e9-b30d-578324fce01a&autoShow=true&language=EN' async='async'>
 </script> -->
@@ -323,23 +333,27 @@
 
 <body>
     <div id="app">
-          <div id="top">
-             <div class="aui-list aui-media-list aui-list-noborder" style="background-color:rgba(0,0,0,0)">
-                 <div class="aui-list-item aui-list-item-middle aui-padded-l-5 aui-padded-r-5">
-                     <div class="aui-media-list-item-inner">
-                         <div class="aui-list-item-inner aui-text-center" >
-                             <div class="aui-searchbar" id="search" onclick="$util.openWindow('search_page_win')">
-                                 <div class="aui-searchbar-input aui-border-radius " id="search-header">
-                                     <i class="aui-iconfont aui-icon-search" style="color: #666666!important;margin-right:-12.25rem;"></i>
-                                     <input type="search" placeholder="Búsqueda" class="aui-text-center" id="search-input" style="color:#666666!important;background-color:#fafafa!important: #fff!important; width: 100%;" tapmode readonly>
-                                 </div>
-                                 <div class="aui-searchbar-btn" style="color: #fff!important;" tapmode>Cancelar</div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
+        <div id="top">
+            <div class="aui-list aui-media-list aui-list-noborder" style="background-color:rgba(0,0,0,0)">
+                <div class="aui-list-item aui-list-item-middle aui-padded-l-5 aui-padded-r-5">
+                    <div class="aui-media-list-item-inner">
+                        <div class="aui-list-item-inner aui-text-center">
+                            <div class="aui-searchbar" id="search" onclick="$util.openWindow('search_page_win')">
+                                <div class="aui-searchbar-input aui-border-radius " id="search-header">
+                                    <i class="aui-iconfont aui-icon-search"
+                                       style="color: #666666!important;margin-right:-12.25rem;"></i>
+                                    <input type="search" placeholder="Búsqueda" class="aui-text-center"
+                                           id="search-input"
+                                           style="color:#666666!important;background-color:#fafafa!important: #fff!important; width: 100%;"
+                                           tapmode readonly>
+                                </div>
+                                <div class="aui-searchbar-btn" style="color: #fff!important;" tapmode>Cancelar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- 中间页 -->
         <div class="aui-content">
             <!-- 轮播 -->
@@ -354,8 +368,8 @@
             <div class="product-tag aui-padded-t-15 ">
                 <section class="aui-grid  aui-margin-l-5 aui-margin-r-5 aui-padded-t-15 aui-padded-b-15">
                     <div class="aui-row aui-padded-t-15 " style="display:flex;flex-wrap:wrap;">
-                        <div class="aui-col-xs-3" v-for="(tag,tagKey) in tags" :key="tagKey"@click="goGoodsList(tag)">
-                            <img :src="tag.thum" class="aui-padded-5" style="margin:0 auto;width:55%;height:70%;">
+                        <div class="aui-col-xs-3" v-for="(tag,tagKey) in tags" :key="tagKey" @click="goGoodsList(tag)">
+                            <img :src="tag.thum" class="aui-padded-5" style="margin:0 auto;width:55%;">
                             <div class="aui-grid-label" v-text="tag.name"></div>
                         </div>
                     </div>
@@ -371,18 +385,22 @@
                 <div class="relative-info" id="relativeinfo0" style="width:72%;">
                     <div class="aui-flex-item-12 ">
                         <div class="aui-flex-col ">
-                            <div class="aui-flex-item-3 relative-info-item" v-for="(coupon,couponKey) in coupons" :key="couponKey" v-if="couponKey<4">
+                            <div class="aui-flex-item-3 relative-info-item" v-for="(coupon,couponKey) in coupons"
+                                 :key="couponKey" v-if="couponKey<4">
                                 <img src="../image/yhq.png" />
                                 <div class="coupon-price" style="position:relative">
                                     <div class="aui-text-center coupons-info" v-if="coupon.coupon_type=='full'">
                                         <span class="discount_money_tag">$</span>
-                                        <span class="discount_money aui-font-weight" v-text="coupon.change_value"></span>
+                                        <span class="discount_money aui-font-weight"
+                                              v-text="coupon.change_value"></span>
                                     </div>
                                     <div class="aui-text-center coupons-info" v-if="coupon.coupon_type=='discount'">
-                                        <span class="discount_money aui-font-weight" v-text="coupon.change_value"></span>
+                                        <span class="discount_money aui-font-weight"
+                                              v-text="coupon.change_value"></span>
                                         <span class="discount_money_tag">Doblar</span>
                                     </div>
-                                    <div class="coupon-infotext aui-text-center" v-text="'Lleno' + coupon.reach_money + 'Dólar'"></div>
+                                    <div class="coupon-infotext aui-text-center"
+                                         v-text="'Lleno' + coupon.reach_money + 'Dólar'"></div>
                                 </div>
                             </div>
                         </div>
@@ -393,7 +411,8 @@
             <div class="discount-list" v-if="discountActivity.rule_info.length>0">
                 <div class="discountTime" style="display:flex;justify-content:space-between;">
                     <img :src="'../image/zekou-1.png'" style="width: 11rem;height: 0.7rem;" class="aui-margin-l-15">
-                    <div :class="'discount-time1'" style="padding-right:1rem;" onclick="$util.openWindow('discount_page_win')">
+                    <div :class="'discount-time1'" style="padding-right:1rem;"
+                         onclick="$util.openWindow('discount_page_win')">
                         <span v-text="day"></span> <label v-text="':'"></label>
                         <span v-text="hour"></span> <label v-text="':'"></label>
                         <span v-text="minute"></span> <label v-text="':'"></label>
@@ -402,16 +421,20 @@
                 </div>
                 <!-- 折扣轮播商品 -->
                 <div class="owl-carousel owl-theme " id="xianshizhekou">
-                    <div class="item aui-bg-white" v-for="(rule, key) in discountActivity.rule_info " :key="key " style="margin: 4px;border-radius: 2px ">
+                    <div class="item aui-bg-white" v-for="(rule, key) in discountActivity.rule_info " :key="key "
+                         style="margin: 4px;border-radius: 2px ">
                         <a @click="goDiscountGoodsDetail(rule.goods_id)">
                             <img :src="rule.goods_info.thum" style="border-radius:2px 2px 0 0;" />
-                            <div class="aui-font-size-12 aui-text-price aui-padded-5 " style="display:flex;justify-content:space-between;align-items:center;">
-                                <span >
-                                  <span class="aui-font-size-12 pink-color" style="font-size:0.5rem;color:#f7568f;">$</span>
-                                  <span class="pink-color" v-text="rule.discount_price" style="color:#f7568f;"></span>
+                            <div class="aui-font-size-12 aui-text-price aui-padded-5 "
+                                 style="display:flex;justify-content:space-between;align-items:center;">
+                                <span>
+                                    <span class="aui-font-size-12 pink-color"
+                                          style="font-size:0.5rem;color:#f7568f;">$</span>
+                                    <span class="pink-color" v-text="rule.discount_price" style="color:#f7568f;"></span>
                                 </span>
-                                <span style="font-size:0.5rem;text-decoration: line-through;color:#cacaca;padding-top:3px;">
-                           ¥<span v-text="rule.goods_info.sell_price"></span></span>
+                                <span
+                                      style="font-size:0.5rem;text-decoration: line-through;color:#cacaca;padding-top:3px;">
+                                    ¥<span v-text="rule.goods_info.sell_price"></span></span>
                             </div>
                         </a>
                     </div>
@@ -426,26 +449,33 @@
                 <div class="district-text" style="border-bottom:1px solid #f5f5f5;" v-if="choicegoods.length != 0">
                     <h3 style="font-size:14px;font-weight:700;color:#ff0000;">Productos seleccionados</h3>
                     <div>
-                        <span style="color: #666;" @click="$util.openWindow('goods_list_model_win',{tag:'Productos seleccionados'})">Ir al boutique mall</span><i class="aui-iconfont aui-icon-right"></i>
+                        <span style="color: #666;"
+                              @click="$util.openWindow('goods_list_model_win',{tag:'Productos seleccionados'})">Ir al
+                            boutique mall</span><i class="aui-iconfont aui-icon-right"></i>
                     </div>
                 </div>
-                <div class="relative-info" id="relativeinfo3" >
+                <div class="relative-info" id="relativeinfo3">
                     <section class="aui-grid">
                         <div class="aui-row">
-                            <div class="aui-col-xs-3 " v-for="(goods,goodsKey) in choicegoods" :key="goodsKey" v-if="goodsKey<8" @click="goGoodsDetail(goods.id)">
-                                <div class=" aui-margin-l-5 aui-margin-r-5 aui-margin-t-10" style="border:1px solid #efefef;border-radius:0.3rem;overflow:hidden;">
+                            <div class="aui-col-xs-3 " v-for="(goods,goodsKey) in choicegoods" :key="goodsKey"
+                                 v-if="goodsKey<8" @click="goGoodsDetail(goods.id)">
+                                <div class=" aui-margin-l-5 aui-margin-r-5 aui-margin-t-10"
+                                     style="border:1px solid #efefef;border-radius:0.3rem;overflow:hidden;">
                                     <img :src="goods.thum" style="border-radius:2px 2px 0 0" />
-                                    <img src="../image/shouxin.png" style="max-width:1rem" class="shouxin" v-if="goods.stock == 0">
-                                    <div class="aui-padded-b-5 aui-padded-t-5  aui-bg-white" style="border-radius: 0 0 2px 2px">
-                                        <div class="choice-price aui-font-size-12 aui-padded-l-5 aui-padded-r-5" style="display:flex;justify-content:space-between;">
-                                          <span>
-                                            <span>$</span>
-                                            <span v-text="goods.sell_price"></span>
-                                          </span>
-                                          <span style="text-decoration:line-through;color:#d6d6d6;">
-                                            <span style="font-size:0.5rem;">$</span>
-                                            <span style="font-size:0.5rem;" v-text="goods.sell_price"></span>
-                                          </span>
+                                    <img src="../image/shouxin.png" style="max-width:1rem" class="shouxin"
+                                         v-if="goods.stock == 0">
+                                    <div class="aui-padded-b-5 aui-padded-t-5  aui-bg-white"
+                                         style="border-radius: 0 0 2px 2px">
+                                        <div class="choice-price aui-font-size-12 aui-padded-l-5 aui-padded-r-5"
+                                             style="display:flex;justify-content:space-between;">
+                                            <span>
+                                                <span>$</span>
+                                                <span v-text="goods.sell_price"></span>
+                                            </span>
+                                            <span style="text-decoration:line-through;color:#d6d6d6;">
+                                                <span style="font-size:0.5rem;">$</span>
+                                                <span style="font-size:0.5rem;" v-text="goods.sell_price"></span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -457,40 +487,50 @@
 
             <!--新品活动-->
             <div style="background-color: #f4f4f4;height: 0.5rem;"></div>
-              <div class="newsgoods-list" v-if="choicegoods.length != 0">
-                  <img :src="xpdt.img" @click="goModel(xpdt)" />
-                  <div class="district-text" v-if="newgoods.length != 0">
-                      <h3 style="font-size:14px;font-weight:700;color:#ff0000;">Novedades</h3>
-                      <div>
-                          <span style="color: #666;" @click="$util.openWindow('goods_list_model_win',{tag:'新品产品'})">Ir al centro de nuevos</span><i class="aui-iconfont aui-icon-right"></i>
-                      </div>
-                  </div>
-                  <div class="relative-info" id="relativeinfo4" style="width:115%;background-color:#f4f4f4">
-                      <div class="owl-carousel owl-theme aui-padded-b-5 aui-padded-t-5 aui-padded-15" id="xinpinhuodong">
-                          <div class="item aui-bg-white " v-for="(goods, key) in newgoods" :key="key " v-if="goods.id" @click="goGoodsDetail(goods.id)" style="margin: 2px; border-radius:0.4rem;overflow:hidden;">
-                              <img :src="goods.thum" />
-                              <img src="../image/shouxin.png" style="max-width:1rem" class="shouxin" v-if="goods.stock == 0">
-                              <h5 class="aui-text-default aui-ellipsis-1 aui-font-size-12 aui-padded-l-10 aui-padded-r-10  aui-bg-white" v-text="goods.name"></h5>
-                              <p class="aui-padded-b-5  aui-padded-l-10 aui-padded-r-10 aui-bg-white" style="border-radius:0 0 2px 2px ">
-                                  <span class="aui-text-price aui-font-size-10">$</span>
-                                  <span class="aui-text-price" v-text="goods.sell_price"></span>
-                              </p>
-                          </div>
-                          <div v-else>&nbsp;</div>
-                      </div>
-                  </div>
-              </div>
+            <div class="newsgoods-list" v-if="choicegoods.length != 0">
+                <img :src="xpdt.img" @click="goModel(xpdt)" />
+                <div class="district-text" v-if="newgoods.length != 0">
+                    <h3 style="font-size:14px;font-weight:700;color:#ff0000;">Novedades</h3>
+                    <div>
+                        <span style="color: #666;" @click="$util.openWindow('goods_list_model_win',{tag:'新品产品'})">Ir al
+                            centro de nuevos</span><i class="aui-iconfont aui-icon-right"></i>
+                    </div>
+                </div>
+                <div class="relative-info" id="relativeinfo4" style="width:115%;background-color:#f4f4f4">
+                    <div class="owl-carousel owl-theme aui-padded-b-5 aui-padded-t-5 aui-padded-15" id="xinpinhuodong">
+                        <div class="item aui-bg-white " v-for="(goods, key) in newgoods" :key="key " v-if="goods.id"
+                             @click="goGoodsDetail(goods.id)"
+                             style="margin: 2px; border-radius:0.4rem;overflow:hidden;">
+                            <img :src="goods.thum" />
+                            <img src="../image/shouxin.png" style="max-width:1rem" class="shouxin"
+                                 v-if="goods.stock == 0">
+                            <h5 class="aui-text-default aui-ellipsis-1 aui-font-size-12 aui-padded-l-10 aui-padded-r-10  aui-bg-white"
+                                v-text="goods.name"></h5>
+                            <p class="aui-padded-b-5  aui-padded-l-10 aui-padded-r-10 aui-bg-white"
+                               style="border-radius:0 0 2px 2px ">
+                                <span class="aui-text-price aui-font-size-10">$</span>
+                                <span class="aui-text-price" v-text="goods.sell_price"></span>
+                            </p>
+                        </div>
+                        <div v-else>&nbsp;</div>
+                    </div>
+                </div>
+            </div>
 
             <!-- 商品列表 -->
 
             <div class="aui-flex-col aui-flex-center ">
                 <div class="aui-flex-item-12 ">
-                    <img src="../image/wntj-1.png" style="width:50%;margin:0px auto;" class="aui-margin-t-10 aui-margin-b-10" />
+                    <img src="../image/wntj-1.png" style="width:50%;margin:0px auto;"
+                         class="aui-margin-t-10 aui-margin-b-10" />
                     <div class="aui-flex-col " style="background-color: #f4f4f4;">
-                        <div class="aui-flex-item-6" style="position: relative;padding:3px;" @click="goGoodsDetail(goods.id)" v-for="(goods,goodsKey) in list" :key="goodsKey ">
+                        <div class="aui-flex-item-6" style="position: relative;padding:3px;"
+                             @click="goGoodsDetail(goods.id)" v-for="(goods,goodsKey) in list" :key="goodsKey ">
                             <img :src="goods.thum ">
                             <img src="../image/shouxin.png" class="shouxin" v-if="goods.stock == 0">
-                            <h5 style="height: 2.2rem;" class="aui-text-default aui-ellipsis-2 aui-font-size-12 aui-padded-t-5 aui-padded-l-5 aui-padded-r-5 aui-bg-white" v-text="goods.name"></h5>
+                            <h5 style="height: 2rem;"
+                                class="aui-text-default aui-ellipsis-2 aui-font-size-12 aui-padded-t-5 aui-padded-l-5 aui-padded-r-5 aui-bg-white"
+                                v-text="goods.name"></h5>
                             <p class="aui-padded-b-5 aui-padded-t-5 aui-padded-l-10 aui-padded-r-10 aui-bg-white ">
                                 <span class="aui-text-price aui-font-size-10">$</span>
                                 <span class="aui-text-price " v-text="goods.sell_price "></span>
@@ -506,7 +546,7 @@
                 <div class='test-version-ok' @click='versionClose'></div>
                 <div class='test-version-close' @click='versionClose'></div>
             </div>
-            <div class="mask"  v-if="testVersionShow" v-cloak></div>
+            <div class="mask" v-if="testVersionShow" v-cloak></div>
         </div>
     </div>
 </body>
@@ -529,7 +569,7 @@
     }
 
 
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         FastClick.attach(document.body);
     }, false);
 
@@ -537,7 +577,7 @@
     var app = {}
     var page = 1;
 
-    apiready = function() {
+    apiready = function () {
         $util.fixPage();
         $api.fixStatusBar($api.byId('top'));
         app = new Vue({
@@ -571,10 +611,10 @@
                 ptdt: {},
                 jpdt: {},
                 xpdt: {},
-                testVersionShow:false,
+                testVersionShow: false,
             },
             filters: {
-                timeFilter: function(value) {
+                timeFilter: function (value) {
                     value = Math.floor(value / 1000);
                     var day = Math.floor(value / 86400);
                     value %= 86400;
@@ -588,13 +628,13 @@
                     return day + 'Día ' + hour + ': ' + minute + ': ' + second;
                 },
                 //获取倒计时天
-                timeFilterday: function(value) {
+                timeFilterday: function (value) {
                     value = Math.floor(value / 1000);
                     var day = Math.floor(value / 86400);
                     return day + 'Día'
                 },
                 //获取倒计时时
-                timeFilterhour: function(value) {
+                timeFilterhour: function (value) {
                     value = Math.floor(value / 1000);
                     value %= 86400;
                     var hour = Math.floor(value / 3600);
@@ -602,7 +642,7 @@
                     return hour
                 },
                 //获取倒计时分
-                timeFilterminute: function(value) {
+                timeFilterminute: function (value) {
                     value = Math.floor(value / 1000);
                     value %= 86400;
                     value %= 3600;
@@ -611,7 +651,7 @@
                     return minute
                 },
                 //获取倒计时秒
-                timeFiltersecond: function(value) {
+                timeFiltersecond: function (value) {
                     value = Math.floor(value / 1000);
                     value %= 86400;
                     value %= 3600;
@@ -622,7 +662,7 @@
             },
             methods: {
                 // 去链接设置的模型dddd
-                goModel: function(content) {
+                goModel: function (content) {
 
                     if (content.is_open_model == 1) {
                         if (content.model == 'goods') {
@@ -656,22 +696,22 @@
                     }
                 },
                 //去公告列表页面
-                goArticleList: function(data) {
+                goArticleList: function (data) {
                     $util.openWindow('article_list_win', {
                         type: data
                     })
                 },
                 // 去商品详情
-                goGoodsDetail: function(goodsId) {
+                goGoodsDetail: function (goodsId) {
                     $util.openWindow('goods_detail_win', {
                         goodsId: goodsId
                     })
                 },
                 //去积分商品详情
-                goScoreGoodsDetail: function(goods) {
+                goScoreGoodsDetail: function (goods) {
                     if (!$util.user) {
                         $util.toast('Por favor');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $util.openWindow('login_win')
                         }, 500);
                         return;
@@ -683,14 +723,14 @@
 
                 },
                 // 去限时折扣商品详情页
-                goDiscountGoodsDetail: function(goodsId) {
+                goDiscountGoodsDetail: function (goodsId) {
                     $util.openWindow('goods_detail_win', {
                         goodsId: goodsId,
                         isDiscountGoods: true
                     })
                 },
                 //去团购页面
-                goGourpGoodsDetail: function(goods) {
+                goGourpGoodsDetail: function (goods) {
                     $util.openWindow('group_goods_detail_win', {
                         goodsId: goods.goods_id,
                         id: goods.id
@@ -700,7 +740,7 @@
                 goScoreShop() {
                     if (!$util.user) {
                         $util.toast('Por favor');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $util.openWindow('login_win')
                         }, 500);
                         return;
@@ -714,7 +754,7 @@
                 goGroOtroshop() {
                     if (!$util.user) {
                         $util.toast('Por favor');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $util.openWindow('login_win')
                         }, 500);
                         return;
@@ -723,35 +763,35 @@
                     }
                 },
                 // 去商品列表
-                goGoodsList: function(tag) {
+                goGoodsList: function (tag) {
                     $util.openWindow('goods_list_model_win', {
                         tag: tag.name
                     })
                 },
                 //去精品页面
-                goJinPinGoodsList: function() {
+                goJinPinGoodsList: function () {
                     $util.openWindow('goods_list_model_win', {
                         tag: '精品产品'
                     })
                 },
                 //去新品页面
-                goXinPinGoodsList: function() {
+                goXinPinGoodsList: function () {
                     $util.openWindow('goods_list_model_win', {
                         tag: '新品产品'
                     })
                 },
                 // 去公告页面
-                goAnnoncements: function(annoncement) {
+                goAnnoncements: function (annoncement) {
                     $util.openWindow('article_detail_win', {
                         type: 'annoncements',
                         articleId: annoncement.id
                     });
                 },
-                versionClose:function(){
-                  this.testVersionShow = false;
+                versionClose: function () {
+                    this.testVersionShow = false;
                 },
                 // 去广告页面
-                goAd: function(ad) {
+                goAd: function (ad) {
                     if (ad.model == 'goods') {
                         $util.openWindow('goods_detail_win', {
                             goodsId: ad.model_id
@@ -767,7 +807,7 @@
                         });
                     }
                 },
-                getData: function() {
+                getData: function () {
                     var that = this;
                     $util.ajax({
                         url: 'api_goods/goods/lists',
@@ -776,21 +816,21 @@
                             'page-limit': 10
                         },
                         isLoading: true,
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         page++;
                         that.list = that.list.concat(resp.data).unique();
-                    }).catch(function(err) {})
+                    }).catch(function (err) { })
                 },
-                getOtherData: function() {
+                getOtherData: function () {
                     var that = this;
                     $util.ajax({
                         url: 'api_articles/banners/lists',
                         data: {
                             type_id: 11
                         }
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         that.banners = resp.data;
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $('#owl-carousel1').owlCarousel({
                                 loop: true,
                                 nav: false,
@@ -799,14 +839,14 @@
                                 items: 1
                             });
                         }, 50);
-                    }).catch(function(err) {});
+                    }).catch(function (err) { });
                     // 加载商品标签
                     $util.ajax({
-                            url: 'api_goods/goods_tags/index'
-                        }).then(function(resp) {
-                            that.tags = resp.data
-                        }).catch(function(err) {})
-                        // 加载公告
+                        url: 'api_goods/goods_tags/index'
+                    }).then(function (resp) {
+                        that.tags = resp.data
+                    }).catch(function (err) { })
+                    // 加载公告
                     $util.ajax({
                         url: 'api_articles/annoncements/lists',
                         data: {
@@ -816,17 +856,17 @@
                             'page-num': 1,
                             'page-limit': 2
                         }
-                    }).then(function(resp) {
+                    }).then(function (resp) {
 
                         that.annoncements = resp.data;
-                    }).catch(function(err) {});
+                    }).catch(function (err) { });
                     //加载优惠券
                     $util.ajax({
                         url: 'api_query/market/coupon',
                         data: {},
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         that.coupons = resp.data;
-                    }).catch(function(err) {});
+                    }).catch(function (err) { });
                     //加载积分商品
 
                     //查询当前的拼团模式、加载拼团商品
@@ -834,43 +874,43 @@
                         url: 'api_group_buy/rules/index',
                         data: {}
 
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         if (resp.data.type == 1) {
                             $util.ajax({
                                 url: 'api_group_buy/group_buy_system_goods/lists',
                                 data: {}
-                            }).then(function(resp) {
+                            }).then(function (resp) {
                                 that.groupgoods = resp.data;
-                            }).catch(function(err) {});
+                            }).catch(function (err) { });
                         } else if (resp.data.type == 2) {
                             $util.ajax({
                                 url: 'api_group_buy/group_buy_user_goods/lists',
                                 data: {}
-                            }).then(function(resp) {
+                            }).then(function (resp) {
                                 that.groupgoods = resp.data;
-                            }).catch(function(err) {});
+                            }).catch(function (err) { });
                         }
 
-                    }).catch(function(err) {});
+                    }).catch(function (err) { });
                     //加载精选产品
                     $util.ajax({
                         url: 'api_goods/goods/lists',
                         data: {
                             custom_tag: 'Sell well'
                         }
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         that.choicegoods = resp.data;
-                    }).catch(function(err) {});
+                    }).catch(function (err) { });
                     //加载新品产品
                     $util.ajax({
                         url: 'api_goods/goods/lists',
                         data: {
                             custom_tag: 'New products'
                         }
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         resp.data.push({});
                         that.newgoods = resp.data;
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $('#xinpinhuodong').owlCarousel({
                                 pagination: false,
                                 loop: false,
@@ -881,11 +921,11 @@
                             });
 
                         }, 50);
-                    }).catch(function(err) {});
+                    }).catch(function (err) { });
                     // 加载限时折扣
                     $util.ajax({
                         url: 'api_query/market/activity',
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         if (resp.data.discount) {
                             // 计算截至时间
                             resp.data.discount[0].deadline = resp.data.discount[0].end_timestamp * 1000 - Date.now();
@@ -895,7 +935,7 @@
                             that.minute = that.timeFilterminute(that.discountActivity.deadline);
                             that.second = that.timeFiltersecond(that.discountActivity.deadline);
                             // 限时折扣轮播初始
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 $('#xianshizhekou').owlCarousel({
                                     loop: false,
                                     nav: false,
@@ -905,7 +945,7 @@
                                 });
                             }, 50);
                             // 倒计时
-                            setInterval(function() {
+                            setInterval(function () {
                                 that.discountActivity.deadline -= 1000;
                                 that.day = that.timeFilterday(that.discountActivity.deadline);
                                 that.hour = that.timeFilterhour(that.discountActivity.deadline);
@@ -913,38 +953,38 @@
                                 that.second = that.timeFiltersecond(that.discountActivity.deadline);
                             }, 1000)
                         }
-                    }).catch(function(err) {});
+                    }).catch(function (err) { });
                 },
-                getParams: function() {
+                getParams: function () {
                     var that = this;
                     $util.ajax({
                         url: 'api_systems/params/getParams',
                         data: {
                             type: 'basic'
                         }
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         that.logo = resp.data.wap_index_logo
                         that.kuaibao = resp.data.kuaibao_img
-                        that.testVersionShow = resp.data.test_pic_show==0?true:false
-                    }).catch(function(err) {})
+                        that.testVersionShow = resp.data.test_pic_show == 0 ? true : false
+                    }).catch(function (err) { })
                     $util.ajax({
                         url: 'api_articles/advertisements/lists',
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         resp.data.map(item => {
                             if (item.type_id === 1) {
                                 that.jfdt = item;
                             } else if (item.type_id === 2) {
                                 that.ptdt = item;
                             } else if (item.type_id === 3) {
-                                  that.jpdt = item;
+                                that.jpdt = item;
                             } else if (item.type_id === 4) {
                                 that.xpdt = item;
                             }
                         })
-                    }).catch(function(err) {})
+                    }).catch(function (err) { })
                 },
                 //获取倒计时时
-                timeFilterhour: function(value) {
+                timeFilterhour: function (value) {
                     value = Math.floor(value / 1000);
                     value %= 86400;
                     var hour = Math.floor(value / 3600);
@@ -952,7 +992,7 @@
                     return hour
                 },
                 //获取倒计时分
-                timeFilterminute: function(value) {
+                timeFilterminute: function (value) {
                     value = Math.floor(value / 1000);
                     value %= 86400;
                     value %= 3600;
@@ -961,7 +1001,7 @@
                     return minute
                 },
                 //获取倒计时秒
-                timeFiltersecond: function(value) {
+                timeFiltersecond: function (value) {
                     value = Math.floor(value / 1000);
                     value %= 86400;
                     value %= 3600;
@@ -970,13 +1010,13 @@
                     return second
                 },
                 //获取倒计时天
-                timeFilterday: function(value) {
+                timeFilterday: function (value) {
                     value = Math.floor(value / 1000);
                     var day = Math.floor(value / 86400);
                     return day + 'Día'
                 },
             },
-            mounted: function() {
+            mounted: function () {
                 this.getData()
                 this.getOtherData()
                 this.getParams();
@@ -986,7 +1026,7 @@
         api.setRefreshHeaderInfo({
             bgColor: '#2cc1f3',
             textColor: '#fff',
-        }, function(ret, err) {
+        }, function (ret, err) {
             app.user = $api.getStorage('user');
             $util.user = $api.getStorage('user');
             page = 1;
@@ -994,23 +1034,25 @@
             app.getData()
             app.getOtherData()
         });
-        api.addEventListener({
-            name: 'appintent'
-        }, function(ret, err) {
-            if (ret) {
-                $util.openWindow('mess_list_win')
-            }
-        })
+        // api.addEventListener({
+        //     name: 'appintent'
+        // }, function (ret, err) {
+        //     // console.log(ret);
+        //     if (ret) {
+        //         $util.openWindow('mess_list_win')
+        //     }
+        // })
+        // 被其他的应用唤起的时候调用的方法
         // 下拉加载
         api.addEventListener({
             name: 'scrolltobottom'
-        }, function(ret, err) {
+        }, function (ret, err) {
             app.getData();
         });
         api.addEventListener({
-            name:'viewappear'
-        }, function(ret, err){
-           app.getParams()
+            name: 'viewappear'
+        }, function (ret, err) {
+            app.getParams()
         });
     }
 </script>
