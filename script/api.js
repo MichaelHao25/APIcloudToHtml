@@ -44,10 +44,19 @@ function apiadapter(payload) {
             //     <div class="minirefresh-scroll">${html}</div>
             // </div>`
             // document.body.innerHTML = html;
+            let down = [...document.querySelectorAll('script')].findIndex(value => {
+                return value.textContent.trim().includes('\'setRefreshHeaderInfo\'')||value.textContent.trim().includes('\"setRefreshHeaderInfo\"')
+            })
 
-            window.miniRefresh = new MiniRefresh({
+            let up = [...document.querySelectorAll('script')].findIndex(value => {
+                return value.textContent.trim().includes('scrolltobottom')
+            })
+            console.log(`down:${down}`);
+            console.log(`up:${up}`);
+            let config = {
                 container: '#minirefresh',
                 down: {
+                    //isAuto: true,
                     callback: function () {
                         // 下拉事件
                         api.sendEvent({
@@ -57,7 +66,7 @@ function apiadapter(payload) {
                     }
                 },
                 up: {
-
+                    //isAuto: false,
                     callback: function () {
                         // 上拉事件
                         // app.getData();
@@ -69,7 +78,24 @@ function apiadapter(payload) {
                         // miniRefresh.endUpLoading(true);
                     }
                 }
-            });
+            }
+            if (down == -1) {
+                config.down.callback=function() {
+                    window.miniRefresh.endDownLoading(true);
+
+                    let ele = document.querySelector('.minirefresh-theme-default .minirefresh-downwrap');
+                    ele&&ele.parentNode.removeChild(ele)
+                };
+            }
+            if (up == -1) {
+                config.up.callback=function() {
+                    window.miniRefresh.endUpLoading(true);
+                    let ele = document.querySelector('.minirefresh-theme-default .minirefresh-upwrap');
+                    ele&&ele.parentNode.removeChild(ele)
+                };
+            }
+            console.log(config);
+            window.miniRefresh = new MiniRefresh(config);
         }
         document.body.appendChild(script);
 

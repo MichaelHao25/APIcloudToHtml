@@ -4,7 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui-flex.css" />
@@ -56,10 +57,12 @@
             margin: 0 auto;
             display: block;
         }
+
         #app {
             width: 99.9%;
             overflow: hidden;
         }
+
         .returni {
             position: absolute;
             z-index: 100;
@@ -72,110 +75,132 @@
         }
     </style>
 </head>
+
 <body>
     <div id="minirefresh" class="minirefresh-wrap">
         <div class="minirefresh-scroll">
-    <div id="app">
-        <!-- 返回按钮 -->
-        <i class="aui-iconfont aui-icon-left returni" onclick="api.closeWin();" id="header" style></i>
-        <!-- 轮播 -->
-        <div class="owl-carousel owl-theme" id="owl-carousel1">
-            <div class="item" v-for="(img,key) in goods.imgs" :key="key">
-                <a href="javascript:void(0)">
-                    <img :src="img" @click="imagelook(img)" />
-                </a>
-            </div>
-        </div>
-        <!-- 限时折扣价格 -->
-        <ul class="aui-list aui-list-in">
-            <li class="aui-list-item aui-text-white" v-if="discountActivity.id" style="background: #d50202;">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title aui-font-size-20 aui-text-white">
-                        <span v-for="(rule, key) in discountActivity.rule_info" :key="key" v-if="rule.goods_id == goods.id">
-                    <span class="aui-font-size-12">$</span>
-                        <span v-text="rule.discount_price"></span>
-                        </span>
-                        <span class="aui-font-size-12" v-text="'$' +goods.sell_price" style="text-decoration: line-through;"></span>
+            <div id="app">
+                <!-- 返回按钮 -->
+                <i class="aui-iconfont aui-icon-left returni" onclick="api.closeWin();" id="header" style></i>
+                <!-- 轮播 -->
+                <div class="owl-carousel owl-theme" id="owl-carousel1">
+                    <div class="item" v-for="(img,key) in goods.imgs" :key="key">
+                        <a href="javascript:void(0)">
+                            <img :src="img" @click="imagelook(img)" />
+                        </a>
                     </div>
-                    <div class="aui-list-item-right aui-font-size-14 aui-text-white" style="max-width:60% !important;">Terminar en {{discountActivity.deadline | timeFilter}}</div> </div>
-            </li>
-        </ul>
-        <!-- 商品信息 -->
-        <div class="aui-content aui-padded-10 aui-bg-white">
-            <h1 class="aui-text-price" v-if="!discountActivity.id">
-              <span class="aui-font-size-14">$</span>
-              <span v-text="goods.sell_price"></span>
-            </h1>
-            <h3 v-text="goods.name" class="aui-padded-t-5"></h3>
-            <div>{{goods.id}}</div>
-            <p class="aui-font-size-12 aui-padded-t-5" v-text="goods.intro"></p>
-            <p class="aui-font-size-12 aui-padded-t-5" style="color: #b3b3b3;">
-                <span class="aui-pull-left" v-text="'Existencias' + goods.stock"></span>
-                <span class="aui-pull-right" v-text="'Ventas' + goods.sell_num"></span>
-        </div>
-        <div class="aui-content aui-margin-b-10">
-            <!-- 规格 -->
-            <ul class="aui-list aui-list-in">
-                <li v-if="isDiscountGoods" class="aui-list-item" v-show="goods.spec_info.length > 0" @click="selectSpec()">
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        <div class="aui-list-item-title aui-font-size-14">Especificaciones</div>
-                        <div class="aui-list-item-right" v-text="select_spec_group_info.spec_option_group || ''"></div>
-                    </div>
-                </li>
-                <!-- 属性 -->
-                <li class="aui-list-item" v-show="goods.attr_info.length > 0" @click="viewAttr()">
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        <div class="aui-list-item-title aui-font-size-14">Propiedades</div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <!-- 选项卡切换 -->
-        <div class="aui-tab" id="tab">
-            <div class="aui-tab-item" :class="{'aui-active': firstTabActive}" @click="changeTab(true)">Detalles</div>
-            <div class="aui-tab-item" :class="{'aui-active': !firstTabActive}" @click="changeTab(false)">Comentarios</div>
-        </div>
-        <!-- 详情 -->
-        <div class="aui-padded-5" id="detail" v-show="firstTabActive">
-            <div v-html="goods.desc"></div>
-            <div v-for="(thum,thumKey) in goods.thums" :key="thumKey">
-                <img :src="thum" @click="imagelook(thum)">
-            </div>
-        </div>
-        <!-- 评价 -->
-        <div class="aui-bg-white" v-show="!firstTabActive">
-            <div v-if="haveNoData" class="aui-col-xs-12 aui-text-center" style="margin-top:20%;margin-bottom: 4rem; background-color: #f5f5f5;">
-                <img src="../image/no_content.png" style="width:18%;margin:0 auto;">
-                <h5 style="margin-top:1rem;" class="aui-font-size-14">Oh. Aquí no hay nada.</h5>
-            </div>
-            <div v-else class="aui-list aui-media-list">
-                <div class="aui-list-item aui-padded-b-5" v-for="(comment,commentKey) in list" :key="commentKey">
-                    <div class="aui-info">
-                        <div class="aui-info-item">
-                            <div class="aui-img-round" style="overflow: hidden;width: 1.5rem;height: 1.5rem;border-radius: 1.5rem;">
-                                <img v-if="comment.user_info" :src="comment.user_info.avatar || '../image/avatar.png'" style="max-width: 100%;" />
+                </div>
+                <!-- 限时折扣价格 -->
+                <ul class="aui-list aui-list-in">
+                    <li class="aui-list-item aui-text-white" v-if="discountActivity.id" style="background: #d50202;">
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-title aui-font-size-20 aui-text-white">
+                                <span v-for="(rule, key) in discountActivity.rule_info" :key="key"
+                                      v-if="rule.goods_id == goods.id">
+                                    <span class="aui-font-size-12">$</span>
+                                    <span v-text="rule.discount_price"></span>
+                                </span>
+                                <span class="aui-font-size-12" v-text="'$' +goods.sell_price"
+                                      style="text-decoration: line-through;"></span>
                             </div>
-                            <span v-if="comment.user_info" class="aui-margin-l-5" v-text="comment.user_info.nick_name || comment.user_info.mobile"></span>
+                            <div class="aui-list-item-right aui-font-size-14 aui-text-white"
+                                 style="max-width:60% !important;">Terminar en
+                                {{discountActivity.deadline | timeFilter}}</div>
                         </div>
-                        <div class="aui-info-item aui-padded-r-10" v-text="comment.create_time"></div>
+                    </li>
+                </ul>
+                <!-- 商品信息 -->
+                <div class="aui-content aui-padded-10 aui-bg-white">
+                    <h1 class="aui-text-price" v-if="!discountActivity.id">
+                        <span class="aui-font-size-14">$</span>
+                        <span v-text="goods.sell_price"></span>
+                    </h1>
+                    <h3 v-text="goods.name" class="aui-padded-t-5"></h3>
+                    <div>{{goods.id}}</div>
+                    <p class="aui-font-size-12 aui-padded-t-5" v-text="goods.intro"></p>
+                    <p class="aui-font-size-12 aui-padded-t-5" style="color: #b3b3b3;">
+                        <span class="aui-pull-left" v-text="'Existencias' + goods.stock"></span>
+                        <span class="aui-pull-right" v-text="'Ventas' + goods.sell_num"></span>
+                </div>
+                <div class="aui-content aui-margin-b-10">
+                    <!-- 规格 -->
+                    <ul class="aui-list aui-list-in">
+                        <li v-if="isDiscountGoods" class="aui-list-item" v-show="goods.spec_info.length > 0"
+                            @click="selectSpec()">
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                <div class="aui-list-item-title aui-font-size-14">Especificaciones</div>
+                                <div class="aui-list-item-right"
+                                     v-text="select_spec_group_info.spec_option_group || ''"></div>
+                            </div>
+                        </li>
+                        <!-- 属性 -->
+                        <li class="aui-list-item" v-show="goods.attr_info.length > 0" @click="viewAttr()">
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                <div class="aui-list-item-title aui-font-size-14">Propiedades</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 选项卡切换 -->
+                <div class="aui-tab" id="tab">
+                    <div class="aui-tab-item" :class="{'aui-active': firstTabActive}" @click="changeTab(true)">Detalles
                     </div>
-                    <div>
-                        <i class="aui-iconfont iconfont icon-shoucang aui-margin-5" v-for="(item,key) in [1,2,3,4,5]" :key="key" style="font-size: 1.2rem;" :style="{color: ((key + 1) <= comment.score ? '#ffc640' : '#ccc')}"></i>
-                        <span v-if="comment.score >= 4" style="margin-left: 6rem;color: #757575;">Bien</span>
-                        <span v-else-if="comment.score == 3" style="margin-left: 6rem;color: #757575;">Evaluación central</span>
-                        <span v-else-if="comment.score <= 2" style="margin-left: 6rem;color: #757575;">Evaluación diferencial</span>
+                    <div class="aui-tab-item" :class="{'aui-active': !firstTabActive}" @click="changeTab(false)">
+                        Comentarios</div>
+                </div>
+                <!-- 详情 -->
+                <div class="aui-padded-5" id="detail" v-show="firstTabActive">
+                    <div v-html="goods.desc"></div>
+                    <div v-for="(thum,thumKey) in goods.thums" :key="thumKey">
+                        <img :src="thum" @click="imagelook(thum)">
                     </div>
-                    <div class="aui-list-item-text aui-padded-t-5 aui-padded-b-5" v-text="comment.content" style="word-break: break-all;"></div>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-3"  style="height:5rem;" v-for="(img,imgKey) in comment.imgs" :key="imgKey" @click="previewImg(comment.imgs, imgKey)">
-                            <img style="width:100%;height:100%;" :src="img" />
+                </div>
+                <!-- 评价 -->
+                <div class="aui-bg-white" v-show="!firstTabActive">
+                    <div v-if="haveNoData" class="aui-col-xs-12 aui-text-center"
+                         style="margin-top:20%;margin-bottom: 4rem; background-color: #f5f5f5;">
+                        <img src="../image/no_content.png" style="width:18%;margin:0 auto;">
+                        <h5 style="margin-top:1rem;" class="aui-font-size-14">Oh. Aquí no hay nada.</h5>
+                    </div>
+                    <div v-else class="aui-list aui-media-list">
+                        <div class="aui-list-item aui-padded-b-5" v-for="(comment,commentKey) in list"
+                             :key="commentKey">
+                            <div class="aui-info">
+                                <div class="aui-info-item">
+                                    <div class="aui-img-round"
+                                         style="overflow: hidden;width: 1.5rem;height: 1.5rem;border-radius: 1.5rem;">
+                                        <img v-if="comment.user_info"
+                                             :src="comment.user_info.avatar || '../image/avatar.png'"
+                                             style="max-width: 100%;" />
+                                    </div>
+                                    <span v-if="comment.user_info" class="aui-margin-l-5"
+                                          v-text="comment.user_info.nick_name || comment.user_info.mobile"></span>
+                                </div>
+                                <div class="aui-info-item aui-padded-r-10" v-text="comment.create_time"></div>
+                            </div>
+                            <div>
+                                <i class="aui-iconfont iconfont icon-shoucang aui-margin-5"
+                                   v-for="(item,key) in [1,2,3,4,5]" :key="key" style="font-size: 1.2rem;"
+                                   :style="{color: ((key + 1) <= comment.score ? '#ffc640' : '#ccc')}"></i>
+                                <span v-if="comment.score >= 4" style="margin-left: 6rem;color: #757575;">Bien</span>
+                                <span v-else-if="comment.score == 3"
+                                      style="margin-left: 6rem;color: #757575;">Evaluación central</span>
+                                <span v-else-if="comment.score <= 2"
+                                      style="margin-left: 6rem;color: #757575;">Evaluación diferencial</span>
+                            </div>
+                            <div class="aui-list-item-text aui-padded-t-5 aui-padded-b-5" v-text="comment.content"
+                                 style="word-break: break-all;"></div>
+                            <div class="aui-row aui-row-padded">
+                                <div class="aui-col-xs-3" style="height:5rem;" v-for="(img,imgKey) in comment.imgs"
+                                     :key="imgKey" @click="previewImg(comment.imgs, imgKey)">
+                                    <img style="width:100%;height:100%;" :src="img" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-      </div>
     </div>
 
 </body>
@@ -186,13 +211,13 @@
 <script type="text/javascript" src="../script/vue.min.js"></script>
 <script type="text/javascript" src="../script/fastclick.js"></script>
 <script type="text/javascript">
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         FastClick.attach(document.body);
     }, false);
     var photoBrowser = {};
     var app = {}
     var page = 1;
-    apiready = function() {
+    apiready = function () {
         $util.fixPage();
         photoBrowser = api.require("photoBrowser");
         var activity = api.require('UILoading');
@@ -211,7 +236,7 @@
                 // 选择的规格组合项
                 select_spec_group_info: {},
                 //选择多规格的组合项目
-                select_last_spec_info:[],
+                select_last_spec_info: [],
                 // 选项卡
                 firstTabActive: true,
                 // 商品评论
@@ -222,38 +247,38 @@
                 discountActivity: {
                     rule_info: []
                 },
-                isDiscountGoods:api.pageParam.isDiscountGoods,
-                load:0,
+                isDiscountGoods: api.pageParam.isDiscountGoods,
+                load: 0,
             },
             methods: {
                 //切换tab
-                changeTab: function(flag) {
+                changeTab: function (flag) {
                     this.firstTabActive = flag;
                 },
-                imagelook: function(img) {
-                  photoBrowser.open({
-                      images: [
-                          img
-                      ],
-                      placeholderImg: img,
-                      bgColor: '#000'
-                  }, function(ret, err) {
-                      if (ret) {
-                        if (ret.eventType == 'click') {
-                          photoBrowser.close()
+                imagelook: function (img) {
+                    photoBrowser.open({
+                        images: [
+                            img
+                        ],
+                        placeholderImg: img,
+                        bgColor: '#000'
+                    }, function (ret, err) {
+                        if (ret) {
+                            if (ret.eventType == 'click') {
+                                photoBrowser.close()
+                            }
+                        } else {
                         }
-                      } else {
-                      }
-                  });
+                    });
                 },
                 //点击购买
-                buy: function() {
-                    if(this.load==0){
-                       return;
+                buy: function () {
+                    if (this.load == 0) {
+                        return;
                     }
                     if (!$util.user) {
                         $util.toast('Por favor.');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $util.openWindow('login_win')
                         }, 500);
                         return;
@@ -283,13 +308,13 @@
                     }
                 },
                 //增加购物车
-                addCart: function() {
-                    if(this.load==0){
-                       return;
+                addCart: function () {
+                    if (this.load == 0) {
+                        return;
                     }
                     if (!$util.user) {
                         $util.toast('Por favor.');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $util.openWindow('login_win')
                         }, 500);
                         return;
@@ -309,7 +334,7 @@
                                 status: 1
                             },
                             isLoading: true,
-                        }).then(function(resp) {
+                        }).then(function (resp) {
                             $util.toast(resp.msg)
                             api.sendEvent({
                                 name: 'updateCart',
@@ -327,7 +352,7 @@
                                 status: 1
                             },
                             isLoading: true,
-                        }).then(function(resp) {
+                        }).then(function (resp) {
                             $util.toast(resp.msg)
                             api.sendEvent({
                                 name: 'updateCart',
@@ -336,33 +361,33 @@
                     }
                 },
                 //批量添加订单
-                addLastConfirm(){
+                addLastConfirm() {
                     if (!$util.user) {
                         $util.toast('Por favor.');
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $util.openWindow('login_win')
                         }, 500);
                         return;
                     }
-                    var goodsList=[]
-                    var that=this
+                    var goodsList = []
+                    var that = this
 
                     //var total_money=0;
-                    var total_count=Number((that.select_last_spec_info || []).reduce(function(a,b){
-                          return a + b.total_count
+                    var total_count = Number((that.select_last_spec_info || []).reduce(function (a, b) {
+                        return a + b.total_count
                     }, 0)).toFixed(0)
-                    if(that.goods.minimum>total_count){
+                    if (that.goods.minimum > total_count) {
                         $util.toast(that.goods.name + 'La mínima cantidad es ' + that.goods.minimum);
                         return;
                     }
-                    this.select_last_spec_info.forEach(function(item){
-                         if(item.total_count>0){
-                             item.options.forEach(function(item1){
-                                 if(item1.num>0){
-                                     goodsList.push({goods_info:that.goods,select_spec_group_info:item1,num:item1.num})
-                                 }
-                             })
-                         }
+                    this.select_last_spec_info.forEach(function (item) {
+                        if (item.total_count > 0) {
+                            item.options.forEach(function (item1) {
+                                if (item1.num > 0) {
+                                    goodsList.push({ goods_info: that.goods, select_spec_group_info: item1, num: item1.num })
+                                }
+                            })
+                        }
                     })
                     if (goodsList.length == 0) {
                         $util.toast('No se ha seleccionado nada artículo.');
@@ -373,44 +398,44 @@
                     }
                 },
                 //批量加入购物车
-                addLastCart(){
-                  if (!$util.user) {
-                      $util.toast('Por favor.');
-                      setTimeout(function() {
-                          $util.openWindow('login_win')
-                      }, 500);
-                      return;
-                  }
-                  var newarr=[]
-                  this.select_last_spec_info.forEach(function(item){
-                       if(item.total_count>0){
-                           item.options.forEach(function(item1){
-                               if(item1.num>0){
-                                   newarr.push({goods_id:item1.goods_id,spec_group_id_str:item1.id_str,num:item1.num})
-                               }
-                           })
-                       }
-                  })
-                 if(newarr.length>0){
-                     $util.ajax({
-                         url: 'api_goods/carts/batch_save',
-                         data: {
-                             cart_info: newarr
-                         },
-                         isLoading: true,
-                     }).then(function(resp) {
-                         $util.toast(resp.msg)
-                     })
-                  }
+                addLastCart() {
+                    if (!$util.user) {
+                        $util.toast('Por favor.');
+                        setTimeout(function () {
+                            $util.openWindow('login_win')
+                        }, 500);
+                        return;
+                    }
+                    var newarr = []
+                    this.select_last_spec_info.forEach(function (item) {
+                        if (item.total_count > 0) {
+                            item.options.forEach(function (item1) {
+                                if (item1.num > 0) {
+                                    newarr.push({ goods_id: item1.goods_id, spec_group_id_str: item1.id_str, num: item1.num })
+                                }
+                            })
+                        }
+                    })
+                    if (newarr.length > 0) {
+                        $util.ajax({
+                            url: 'api_goods/carts/batch_save',
+                            data: {
+                                cart_info: newarr
+                            },
+                            isLoading: true,
+                        }).then(function (resp) {
+                            $util.toast(resp.msg)
+                        })
+                    }
 
                 },
                 //预览图片
-                previewImg: function(imgs, key) {
+                previewImg: function (imgs, key) {
                     photoBrowser.open({
                         images: imgs,
                         activeIndex: key,
                         bgColor: 'rgba(0,0,0,0.85)'
-                    }, function(ret, err) {
+                    }, function (ret, err) {
                         if (ret) {
                             if (ret.eventType == 'click') {
                                 photoBrowser.close();
@@ -421,12 +446,12 @@
                     });
                 },
                 // 选择规格
-                selectSpec: function(type) {
+                selectSpec: function (type) {
                     var that = this
 
                     api.openFrame({
                         name: 'goods_spec_info_select_frm',
-                        url: that.isDiscountGoods?'./goods_spec_info_select_frm.html':'./goods_spec_info_last_select_frm.html',
+                        url: that.isDiscountGoods ? './goods_spec_info_select_frm.html' : './goods_spec_info_last_select_frm.html',
                         rect: {
                             x: 0,
                             y: api.winHeight / 4,
@@ -451,7 +476,7 @@
                     });
                 },
                 // 查看属性
-                viewAttr: function() {
+                viewAttr: function () {
                     api.openFrame({
                         name: 'goods_attr_info_view_frm',
                         url: './goods_attr_info_view_frm.html',
@@ -476,23 +501,23 @@
                         hScrollBarEnabled: false
                     });
                 },
-                loadGoods: function() {
+                loadGoods: function () {
 
                     var that = this;
-                        //加载商品
+                    //加载商品
                     $util.ajax({
                         url: 'api_goods/goods/read',
                         data: {
                             id: api.pageParam.goodsId
                         },
                         isLoading: true,
-                    }).then(function(resp) {
-                        resp.data.spec_group_info = resp.data.spec_group_info.map(function(item) {
+                    }).then(function (resp) {
+                        resp.data.spec_group_info = resp.data.spec_group_info.map(function (item) {
                             item.spec_option_group = item.spec_option_group.split('_').sort().toString();
                             return item;
                         })
-                        resp.data.spec_info = resp.data.spec_info.map(function(spec) {
-                            spec.options = spec.options.map(function(option) {
+                        resp.data.spec_info = resp.data.spec_info.map(function (spec) {
+                            spec.options = spec.options.map(function (option) {
                                 return {
                                     isSelected: false,
                                     option: option
@@ -501,8 +526,8 @@
                             return spec
                         })
                         that.goods = resp.data;
-                        that.load=1;
-                        setTimeout(function() {
+                        that.load = 1;
+                        setTimeout(function () {
                             $('#owl-carousel1').owlCarousel({
                                 loop: false,
                                 nav: false,
@@ -517,22 +542,22 @@
                             // 加载限时折扣
                             $util.ajax({
                                 url: 'api_query/market/activity',
-                            }).then(function(resp) {
+                            }).then(function (resp) {
                                 if (resp.data.discount) {
                                     // 计算截至时间
                                     resp.data.discount[0].deadline = resp.data.discount[0].end_timestamp * 1000 - Date.now();
                                     that.discountActivity = resp.data.discount[0];
                                     // 倒计时
-                                    setInterval(function() {
+                                    setInterval(function () {
                                         that.discountActivity.deadline -= 1000;
 
                                     }, 1000)
                                 }
-                            }).catch(function(err) {})
+                            }).catch(function (err) { })
                         }
-                    }).catch(function(err) {})
+                    }).catch(function (err) { })
                 },
-                getData: function() {
+                getData: function () {
                     var that = this;
                     $util.ajax({
                         url: 'api_query/goods/comments',
@@ -543,15 +568,15 @@
                         data: {
                             goods_id: api.pageParam.goodsId
                         }
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         page++;
                         that.list = that.list.concat(resp.data).unique();
                         that.haveNoData = !Boolean(that.list.length)
-                    }).catch(function(err) {})
+                    }).catch(function (err) { })
                 },
             },
             filters: {
-                timeFilter: function(value) {
+                timeFilter: function (value) {
                     if (!value) {
                         return '';
                     }
@@ -568,22 +593,27 @@
                     return day + 'días ' + hour + ': ' + minute + ': ' + second;
                 }
             },
-            mounted: function() {
+            mounted: function () {
                 this.loadGoods()
                 this.getData()
             }
         })
+        api.setRefreshHeaderInfo({
+            bgColor: '#eee',
+            textColor: '#fff',
+        }, function(ret, err) {
+          
+        });
         api.addEventListener({
             name: 'scrolltobottom'
-        }, function(ret, err) {
+        }, function (ret, err) {
             app.getData()
         });
-        window.miniRefresh&&(window.miniRefresh.options.down.isLock = true)
 
         // 监听选择规格事件
         api.addEventListener({
             name: 'updateGoodsSpecInfo'
-        }, function(ret, err) {
+        }, function (ret, err) {
             if (ret) {
                 app.goods = ret.value.goods;
                 app.select_spec_group_info = ret.value.select_spec_group_info;
@@ -601,15 +631,15 @@
         // 监听批量选择规格事件
         api.addEventListener({
             name: 'updateLastGoodsSpecInfo'
-        }, function(ret, err) {
+        }, function (ret, err) {
             if (ret) {
                 app.goods = ret.value.goods;
-                app.select_last_spec_info=ret.value.select_last_spec_info;
-                if(ret.value.type=='cart'){
-                  app.addLastCart();
+                app.select_last_spec_info = ret.value.select_last_spec_info;
+                if (ret.value.type == 'cart') {
+                    app.addLastCart();
                 }
-                else{
-                  app.addLastConfirm();
+                else {
+                    app.addLastConfirm();
                 }
             } else {
                 alert(JSON.stringify(err));

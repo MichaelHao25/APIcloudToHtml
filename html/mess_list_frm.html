@@ -1,7 +1,7 @@
 <!--
  * @since: 2020-10-24 12:04:02
  * @LastAuthor: Blue
- * @lastTime: 2020-11-06 22:23:07
+ * @lastTime: 2020-11-06 23:22:03
  * @FilePath: /A6001888506312/html/mess_list_frm.html
 -->
 <!doctype html>
@@ -195,7 +195,6 @@
               app.lists = resp.data
           }).catch(function(err) {})
         });
-        window.miniRefresh&&(window.miniRefresh.options.up.isLock = true);
         //监听内容页面是否发送过消息
         api.addEventListener({
             name: 'refreshmess'
