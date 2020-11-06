@@ -121,12 +121,16 @@
             })
             // 下拉刷新
         api.setRefreshHeaderInfo({
-            bgColor: '#eee',
-            textColor: '#fff',
-            showTime: true
-        }, function(ret, err) {
+            bgColor: '#fff',
+        }, function (ret, err) {
             app.loadAsset()
         });
+        api.addEventListener({
+            name: 'setRefreshHeaderInfo'
+        }, function (ret, err) {
+            app.loadAsset()
+        });
+        window.miniRefresh && (window.miniRefresh.options.down.isLock = false)
         api.addEventListener({
             name: 'updateWallet'
         }, function(ret, err) {

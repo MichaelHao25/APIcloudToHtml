@@ -140,9 +140,15 @@
         });
         api.setRefreshHeaderInfo({
             bgColor: '#fff',
-        }, function(ret, err) {
+        }, function (ret, err) {
             app.getData()
         });
+        api.addEventListener({
+            name: 'setRefreshHeaderInfo'
+        }, function (ret, err) {
+            app.getData()
+        });
+        window.miniRefresh && (window.miniRefresh.options.down.isLock = false)
     };
 </script>
 

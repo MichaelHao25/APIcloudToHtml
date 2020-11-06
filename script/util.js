@@ -138,6 +138,12 @@
                         _u.log(options.url)
                         reject(ret)
                     } else if (ret.code == 1) {
+                        if(ret.data<10){
+                            window.miniRefresh&&(window.miniRefresh.options.up.isLock = true);
+                            window.miniRefresh&&window.miniRefresh.endUpLoading(true);
+                        }else{
+                            window.miniRefresh&&(window.miniRefresh.options.up.isLock = false);
+                        }
                         resolve(ret);
                     } else {
                         _u.log(options.url)

@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-06 22:52:49
+ * @FilePath: /A6001888506312/html/bonus_wallet_win.html
+-->
 <!-- 模型win -->
 <!doctype html>
 <html>
@@ -140,9 +146,15 @@
         });
         api.setRefreshHeaderInfo({
             bgColor: '#fff',
-        }, function(ret, err) {
+        }, function (ret, err) {
             app.getData()
         });
+        api.addEventListener({
+            name: 'setRefreshHeaderInfo'
+        }, function (ret, err) {
+            app.getData()
+        });
+        window.miniRefresh && (window.miniRefresh.options.down.isLock = false)
     };
 </script>
 
