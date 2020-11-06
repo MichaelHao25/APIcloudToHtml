@@ -12,7 +12,9 @@
         return n;
     }
     var _u = {};
-    _u.origin = 'https://www.177pinche.com/';
+    // _u.origin = 'https://www.177pinche.com/';
+    _u.origin = 'http://t.0lz.net/';
+    
     // _u.origin = 'http://177pinche.yznt.com/';
 
     //  _u.origin = 'http://wancllshop.lugu110.wancll.vip/';
@@ -61,7 +63,7 @@
         var obj = {
             url: _u.origin + 'index.php/' + options.url,
             method: options.method,
-            timeout: 20 * 1000,
+            // timeout: 20 * 1000,
             headers: options.headers
         }
         switch (options.type) {
@@ -147,6 +149,8 @@
                     _u.log(err)
                     reject(err)
                 }
+                window.miniRefresh&&window.miniRefresh.endDownLoading(true);
+                window.miniRefresh&&window.miniRefresh.endUpLoading(true);
             });
         })
     }

@@ -332,223 +332,240 @@
 </head>
 
 <body>
-    <div id="app">
-        <div id="top">
-            <div class="aui-list aui-media-list aui-list-noborder" style="background-color:rgba(0,0,0,0)">
-                <div class="aui-list-item aui-list-item-middle aui-padded-l-5 aui-padded-r-5">
-                    <div class="aui-media-list-item-inner">
-                        <div class="aui-list-item-inner aui-text-center">
-                            <div class="aui-searchbar" id="search" onclick="$util.openWindow('search_page_win')">
-                                <div class="aui-searchbar-input aui-border-radius " id="search-header">
-                                    <i class="aui-iconfont aui-icon-search"
-                                       style="color: #666666!important;margin-right:-12.25rem;"></i>
-                                    <input type="search" placeholder="Búsqueda" class="aui-text-center"
-                                           id="search-input"
-                                           style="color:#666666!important;background-color:#fafafa!important: #fff!important; width: 100%;"
-                                           tapmode readonly>
-                                </div>
-                                <div class="aui-searchbar-btn" style="color: #fff!important;" tapmode>Cancelar</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 中间页 -->
-        <div class="aui-content">
-            <!-- 轮播 -->
-            <div class="owl-carousel owl-theme" id="owl-carousel1">
-                <div class="item" v-for="(banner,key) in banners" key="key">
-                    <a @click="goModel(banner)">
-                        <img :src="banner.img" />
-                    </a>
-                </div>
-            </div>
-            <!-- 标签 -->
-            <div class="product-tag aui-padded-t-15 ">
-                <section class="aui-grid  aui-margin-l-5 aui-margin-r-5 aui-padded-t-15 aui-padded-b-15">
-                    <div class="aui-row aui-padded-t-15 " style="display:flex;flex-wrap:wrap;">
-                        <div class="aui-col-xs-3" v-for="(tag,tagKey) in tags" :key="tagKey" @click="goGoodsList(tag)">
-                            <img :src="tag.thum" class="aui-padded-5" style="margin:0 auto;width:55%;">
-                            <div class="aui-grid-label" v-text="tag.name"></div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <!-- 公告 -->
-
-            <!--优惠券信息-->
-            <div class="coupon-list" v-if="coupons.length != 0" onclick="$util.openWindow('coupon_win')">
-                <div class="absolute-bg">
-                    <img class="absolute-bg-img" id="absolutebgimg0" src="../image/yhqbg.png" />
-                </div>
-                <div class="relative-info" id="relativeinfo0" style="width:72%;">
-                    <div class="aui-flex-item-12 ">
-                        <div class="aui-flex-col ">
-                            <div class="aui-flex-item-3 relative-info-item" v-for="(coupon,couponKey) in coupons"
-                                 :key="couponKey" v-if="couponKey<4">
-                                <img src="../image/yhq.png" />
-                                <div class="coupon-price" style="position:relative">
-                                    <div class="aui-text-center coupons-info" v-if="coupon.coupon_type=='full'">
-                                        <span class="discount_money_tag">$</span>
-                                        <span class="discount_money aui-font-weight"
-                                              v-text="coupon.change_value"></span>
-                                    </div>
-                                    <div class="aui-text-center coupons-info" v-if="coupon.coupon_type=='discount'">
-                                        <span class="discount_money aui-font-weight"
-                                              v-text="coupon.change_value"></span>
-                                        <span class="discount_money_tag">Doblar</span>
-                                    </div>
-                                    <div class="coupon-infotext aui-text-center"
-                                         v-text="'Lleno' + coupon.reach_money + 'Dólar'"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 限时折扣 -->
-            <div class="discount-list" v-if="discountActivity.rule_info.length>0">
-                <div class="discountTime" style="display:flex;justify-content:space-between;">
-                    <img :src="'../image/zekou-1.png'" style="width: 11rem;height: 0.7rem;" class="aui-margin-l-15">
-                    <div :class="'discount-time1'" style="padding-right:1rem;"
-                         onclick="$util.openWindow('discount_page_win')">
-                        <span v-text="day"></span> <label v-text="':'"></label>
-                        <span v-text="hour"></span> <label v-text="':'"></label>
-                        <span v-text="minute"></span> <label v-text="':'"></label>
-                        <span v-text="second"></span>
-                    </div>
-                </div>
-                <!-- 折扣轮播商品 -->
-                <div class="owl-carousel owl-theme " id="xianshizhekou">
-                    <div class="item aui-bg-white" v-for="(rule, key) in discountActivity.rule_info " :key="key "
-                         style="margin: 4px;border-radius: 2px ">
-                        <a @click="goDiscountGoodsDetail(rule.goods_id)">
-                            <img :src="rule.goods_info.thum" style="border-radius:2px 2px 0 0;" />
-                            <div class="aui-font-size-12 aui-text-price aui-padded-5 "
-                                 style="display:flex;justify-content:space-between;align-items:center;">
-                                <span>
-                                    <span class="aui-font-size-12 pink-color"
-                                          style="font-size:0.5rem;color:#f7568f;">$</span>
-                                    <span class="pink-color" v-text="rule.discount_price" style="color:#f7568f;"></span>
-                                </span>
-                                <span
-                                      style="font-size:0.5rem;text-decoration: line-through;color:#cacaca;padding-top:3px;">
-                                    ¥<span v-text="rule.goods_info.sell_price"></span></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- </div> -->
-            </div>
-            <!--积分兑换-->
-
-
-            <div class="choicegoods-list" v-if="choicegoods.length != 0">
-                <img :src="jpdt.img" @click="goModel(jpdt)" />
-                <div class="district-text" style="border-bottom:1px solid #f5f5f5;" v-if="choicegoods.length != 0">
-                    <h3 style="font-size:14px;font-weight:700;color:#ff0000;">Productos seleccionados</h3>
-                    <div>
-                        <span style="color: #666;"
-                              @click="$util.openWindow('goods_list_model_win',{tag:'Productos seleccionados'})">Ir al
-                            boutique mall</span><i class="aui-iconfont aui-icon-right"></i>
-                    </div>
-                </div>
-                <div class="relative-info" id="relativeinfo3">
-                    <section class="aui-grid">
-                        <div class="aui-row">
-                            <div class="aui-col-xs-3 " v-for="(goods,goodsKey) in choicegoods" :key="goodsKey"
-                                 v-if="goodsKey<8" @click="goGoodsDetail(goods.id)">
-                                <div class=" aui-margin-l-5 aui-margin-r-5 aui-margin-t-10"
-                                     style="border:1px solid #efefef;border-radius:0.3rem;overflow:hidden;">
-                                    <img :src="goods.thum" style="border-radius:2px 2px 0 0" />
-                                    <img src="../image/shouxin.png" style="max-width:1rem" class="shouxin"
-                                         v-if="goods.stock == 0">
-                                    <div class="aui-padded-b-5 aui-padded-t-5  aui-bg-white"
-                                         style="border-radius: 0 0 2px 2px">
-                                        <div class="choice-price aui-font-size-12 aui-padded-l-5 aui-padded-r-5"
-                                             style="display:flex;justify-content:space-between;">
-                                            <span>
-                                                <span>$</span>
-                                                <span v-text="goods.sell_price"></span>
-                                            </span>
-                                            <span style="text-decoration:line-through;color:#d6d6d6;">
-                                                <span style="font-size:0.5rem;">$</span>
-                                                <span style="font-size:0.5rem;" v-text="goods.sell_price"></span>
-                                            </span>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
+            <div id="app">
+                <div id="top">
+                    <div class="aui-list aui-media-list aui-list-noborder" style="background-color:rgba(0,0,0,0)">
+                        <div class="aui-list-item aui-list-item-middle aui-padded-l-5 aui-padded-r-5">
+                            <div class="aui-media-list-item-inner">
+                                <div class="aui-list-item-inner aui-text-center">
+                                    <div class="aui-searchbar" id="search"
+                                         onclick="$util.openWindow('search_page_win')">
+                                        <div class="aui-searchbar-input aui-border-radius " id="search-header">
+                                            <i class="aui-iconfont aui-icon-search"
+                                               style="color: #666666!important;margin-right:-12.25rem;"></i>
+                                            <input type="search" placeholder="Búsqueda" class="aui-text-center"
+                                                   id="search-input"
+                                                   style="color:#666666!important;background-color:#fafafa!important: #fff!important; width: 100%;"
+                                                   tapmode readonly>
+                                        </div>
+                                        <div class="aui-searchbar-btn" style="color: #fff!important;" tapmode>Cancelar
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                </div>
-            </div>
-
-            <!--新品活动-->
-            <div style="background-color: #f4f4f4;height: 0.5rem;"></div>
-            <div class="newsgoods-list" v-if="choicegoods.length != 0">
-                <img :src="xpdt.img" @click="goModel(xpdt)" />
-                <div class="district-text" v-if="newgoods.length != 0">
-                    <h3 style="font-size:14px;font-weight:700;color:#ff0000;">Novedades</h3>
-                    <div>
-                        <span style="color: #666;" @click="$util.openWindow('goods_list_model_win',{tag:'新品产品'})">Ir al
-                            centro de nuevos</span><i class="aui-iconfont aui-icon-right"></i>
                     </div>
                 </div>
-                <div class="relative-info" id="relativeinfo4" style="width:115%;background-color:#f4f4f4">
-                    <div class="owl-carousel owl-theme aui-padded-b-5 aui-padded-t-5 aui-padded-15" id="xinpinhuodong">
-                        <div class="item aui-bg-white " v-for="(goods, key) in newgoods" :key="key " v-if="goods.id"
-                             @click="goGoodsDetail(goods.id)"
-                             style="margin: 2px; border-radius:0.4rem;overflow:hidden;">
-                            <img :src="goods.thum" />
-                            <img src="../image/shouxin.png" style="max-width:1rem" class="shouxin"
-                                 v-if="goods.stock == 0">
-                            <h5 class="aui-text-default aui-ellipsis-1 aui-font-size-12 aui-padded-l-10 aui-padded-r-10  aui-bg-white"
-                                v-text="goods.name"></h5>
-                            <p class="aui-padded-b-5  aui-padded-l-10 aui-padded-r-10 aui-bg-white"
-                               style="border-radius:0 0 2px 2px ">
-                                <span class="aui-text-price aui-font-size-10">$</span>
-                                <span class="aui-text-price" v-text="goods.sell_price"></span>
-                            </p>
-                        </div>
-                        <div v-else>&nbsp;</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 商品列表 -->
-
-            <div class="aui-flex-col aui-flex-center ">
-                <div class="aui-flex-item-12 ">
-                    <img src="../image/wntj-1.png" style="width:50%;margin:0px auto;"
-                         class="aui-margin-t-10 aui-margin-b-10" />
-                    <div class="aui-flex-col " style="background-color: #f4f4f4;">
-                        <div class="aui-flex-item-6" style="position: relative;padding:3px;"
-                             @click="goGoodsDetail(goods.id)" v-for="(goods,goodsKey) in list" :key="goodsKey ">
-                            <img :src="goods.thum ">
-                            <img src="../image/shouxin.png" class="shouxin" v-if="goods.stock == 0">
-                            <h5 style="height: 2rem;"
-                                class="aui-text-default aui-ellipsis-2 aui-font-size-12 aui-padded-t-5 aui-padded-l-5 aui-padded-r-5 aui-bg-white"
-                                v-text="goods.name"></h5>
-                            <p class="aui-padded-b-5 aui-padded-t-5 aui-padded-l-10 aui-padded-r-10 aui-bg-white ">
-                                <span class="aui-text-price aui-font-size-10">$</span>
-                                <span class="aui-text-price " v-text="goods.sell_price "></span>
-                            </p>
+                <!-- 中间页 -->
+                <div class="aui-content">
+                    <!-- 轮播 -->
+                    <div class="owl-carousel owl-theme" id="owl-carousel1">
+                        <div class="item" v-for="(banner,key) in banners" key="key">
+                            <a @click="goModel(banner)">
+                                <img :src="banner.img" />
+                            </a>
                         </div>
                     </div>
+                    <!-- 标签 -->
+                    <div class="product-tag aui-padded-t-15 ">
+                        <section class="aui-grid  aui-margin-l-5 aui-margin-r-5 aui-padded-t-15 aui-padded-b-15">
+                            <div class="aui-row aui-padded-t-15 " style="display:flex;flex-wrap:wrap;">
+                                <div class="aui-col-xs-3" v-for="(tag,tagKey) in tags" :key="tagKey"
+                                     @click="goGoodsList(tag)">
+                                    <img :src="tag.thum" class="aui-padded-5" style="margin:0 auto;width:55%;">
+                                    <div class="aui-grid-label" v-text="tag.name"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- 公告 -->
+
+                    <!--优惠券信息-->
+                    <div class="coupon-list" v-if="coupons.length != 0" onclick="$util.openWindow('coupon_win')">
+                        <div class="absolute-bg">
+                            <img class="absolute-bg-img" id="absolutebgimg0" src="../image/yhqbg.png" />
+                        </div>
+                        <div class="relative-info" id="relativeinfo0" style="width:72%;">
+                            <div class="aui-flex-item-12 ">
+                                <div class="aui-flex-col ">
+                                    <div class="aui-flex-item-3 relative-info-item"
+                                         v-for="(coupon,couponKey) in coupons" :key="couponKey" v-if="couponKey<4">
+                                        <img src="../image/yhq.png" />
+                                        <div class="coupon-price" style="position:relative">
+                                            <div class="aui-text-center coupons-info" v-if="coupon.coupon_type=='full'">
+                                                <span class="discount_money_tag">$</span>
+                                                <span class="discount_money aui-font-weight"
+                                                      v-text="coupon.change_value"></span>
+                                            </div>
+                                            <div class="aui-text-center coupons-info"
+                                                 v-if="coupon.coupon_type=='discount'">
+                                                <span class="discount_money aui-font-weight"
+                                                      v-text="coupon.change_value"></span>
+                                                <span class="discount_money_tag">Doblar</span>
+                                            </div>
+                                            <div class="coupon-infotext aui-text-center"
+                                                 v-text="'Lleno' + coupon.reach_money + 'Dólar'"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 限时折扣 -->
+                    <div class="discount-list" v-if="discountActivity.rule_info.length>0">
+                        <div class="discountTime" style="display:flex;justify-content:space-between;">
+                            <img :src="'../image/zekou-1.png'" style="width: 11rem;height: 0.7rem;"
+                                 class="aui-margin-l-15">
+                            <div :class="'discount-time1'" style="padding-right:1rem;"
+                                 onclick="$util.openWindow('discount_page_win')">
+                                <span v-text="day"></span> <label v-text="':'"></label>
+                                <span v-text="hour"></span> <label v-text="':'"></label>
+                                <span v-text="minute"></span> <label v-text="':'"></label>
+                                <span v-text="second"></span>
+                            </div>
+                        </div>
+                        <!-- 折扣轮播商品 -->
+                        <div class="owl-carousel owl-theme " id="xianshizhekou">
+                            <div class="item aui-bg-white" v-for="(rule, key) in discountActivity.rule_info "
+                                 :key="key " style="margin: 4px;border-radius: 2px ">
+                                <a @click="goDiscountGoodsDetail(rule.goods_id)">
+                                    <img :src="rule.goods_info.thum" style="border-radius:2px 2px 0 0;" />
+                                    <div class="aui-font-size-12 aui-text-price aui-padded-5 "
+                                         style="display:flex;justify-content:space-between;align-items:center;">
+                                        <span>
+                                            <span class="aui-font-size-12 pink-color"
+                                                  style="font-size:0.5rem;color:#f7568f;">$</span>
+                                            <span class="pink-color" v-text="rule.discount_price"
+                                                  style="color:#f7568f;"></span>
+                                        </span>
+                                        <span
+                                              style="font-size:0.5rem;text-decoration: line-through;color:#cacaca;padding-top:3px;">
+                                            ¥<span v-text="rule.goods_info.sell_price"></span></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                    <!--积分兑换-->
+
+
+                    <div class="choicegoods-list" v-if="choicegoods.length != 0">
+                        <img :src="jpdt.img" @click="goModel(jpdt)" />
+                        <div class="district-text" style="border-bottom:1px solid #f5f5f5;"
+                             v-if="choicegoods.length != 0">
+                            <h3 style="font-size:14px;font-weight:700;color:#ff0000;">Productos seleccionados</h3>
+                            <div>
+                                <span style="color: #666;"
+                                      @click="$util.openWindow('goods_list_model_win',{tag:'Productos seleccionados'})">Ir
+                                    al
+                                    boutique mall</span><i class="aui-iconfont aui-icon-right"></i>
+                            </div>
+                        </div>
+                        <div class="relative-info" id="relativeinfo3">
+                            <section class="aui-grid">
+                                <div class="aui-row">
+                                    <div class="aui-col-xs-3 " v-for="(goods,goodsKey) in choicegoods" :key="goodsKey"
+                                         v-if="goodsKey<8" @click="goGoodsDetail(goods.id)">
+                                        <div class=" aui-margin-l-5 aui-margin-r-5 aui-margin-t-10"
+                                             style="border:1px solid #efefef;border-radius:0.3rem;overflow:hidden;">
+                                            <img :src="goods.thum" style="border-radius:2px 2px 0 0" />
+                                            <img src="../image/shouxin.png" style="max-width:1rem" class="shouxin"
+                                                 v-if="goods.stock == 0">
+                                            <div class="aui-padded-b-5 aui-padded-t-5  aui-bg-white"
+                                                 style="border-radius: 0 0 2px 2px">
+                                                <div class="choice-price aui-font-size-12 aui-padded-l-5 aui-padded-r-5"
+                                                     style="display:flex;justify-content:space-between;">
+                                                    <span>
+                                                        <span>$</span>
+                                                        <span v-text="goods.sell_price"></span>
+                                                    </span>
+                                                    <span style="text-decoration:line-through;color:#d6d6d6;">
+                                                        <span style="font-size:0.5rem;">$</span>
+                                                        <span style="font-size:0.5rem;"
+                                                              v-text="goods.sell_price"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!--新品活动-->
+                    <div style="background-color: #f4f4f4;height: 0.5rem;"></div>
+                    <div class="newsgoods-list" v-if="choicegoods.length != 0">
+                        <img :src="xpdt.img" @click="goModel(xpdt)" />
+                        <div class="district-text" v-if="newgoods.length != 0">
+                            <h3 style="font-size:14px;font-weight:700;color:#ff0000;">Novedades</h3>
+                            <div>
+                                <span style="color: #666;"
+                                      @click="$util.openWindow('goods_list_model_win',{tag:'新品产品'})">Ir al
+                                    centro de nuevos</span><i class="aui-iconfont aui-icon-right"></i>
+                            </div>
+                        </div>
+                        <div class="relative-info" id="relativeinfo4" style="width:115%;background-color:#f4f4f4">
+                            <div class="owl-carousel owl-theme aui-padded-b-5 aui-padded-t-5 aui-padded-15"
+                                 id="xinpinhuodong">
+                                <div class="item aui-bg-white " v-for="(goods, key) in newgoods" :key="key "
+                                     v-if="goods.id" @click="goGoodsDetail(goods.id)"
+                                     style="margin: 2px; border-radius:0.4rem;overflow:hidden;">
+                                    <img :src="goods.thum" />
+                                    <img src="../image/shouxin.png" style="max-width:1rem" class="shouxin"
+                                         v-if="goods.stock == 0">
+                                    <h5 class="aui-text-default aui-ellipsis-1 aui-font-size-12 aui-padded-l-10 aui-padded-r-10  aui-bg-white"
+                                        v-text="goods.name"></h5>
+                                    <p class="aui-padded-b-5  aui-padded-l-10 aui-padded-r-10 aui-bg-white"
+                                       style="border-radius:0 0 2px 2px ">
+                                        <span class="aui-text-price aui-font-size-10">$</span>
+                                        <span class="aui-text-price" v-text="goods.sell_price"></span>
+                                    </p>
+                                </div>
+                                <div v-else>&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 商品列表 -->
+
+                    <div class="aui-flex-col aui-flex-center ">
+                        <div class="aui-flex-item-12 ">
+                            <img src="../image/wntj-1.png" style="width:50%;margin:0px auto;"
+                                 class="aui-margin-t-10 aui-margin-b-10" />
+                            <div class="aui-flex-col " style="background-color: #f4f4f4;">
+                                <div class="aui-flex-item-6" style="position: relative;padding:3px;"
+                                     @click="goGoodsDetail(goods.id)" v-for="(goods,goodsKey) in list" :key="goodsKey ">
+                                    <img :src="goods.thum ">
+                                    <img src="../image/shouxin.png" class="shouxin" v-if="goods.stock == 0">
+                                    <h5 style="height: 2rem;"
+                                        class="aui-text-default aui-ellipsis-2 aui-font-size-12 aui-padded-t-5 aui-padded-l-5 aui-padded-r-5 aui-bg-white"
+                                        v-text="goods.name"></h5>
+                                    <p
+                                       class="aui-padded-b-5 aui-padded-t-5 aui-padded-l-10 aui-padded-r-10 aui-bg-white ">
+                                        <span class="aui-text-price aui-font-size-10">$</span>
+                                        <span class="aui-text-price " v-text="goods.sell_price "></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 首页弹窗 -->
+                    <div class='test-version-popup' v-if="testVersionShow" v-cloak>
+                        <img src='../image/test-version.png'></image>
+                        <div class='test-version-ok' @click='versionClose'></div>
+                        <div class='test-version-close' @click='versionClose'></div>
+                    </div>
+                    <div class="mask" v-if="testVersionShow" v-cloak></div>
                 </div>
             </div>
-
-            <!-- 首页弹窗 -->
-            <div class='test-version-popup' v-if="testVersionShow" v-cloak>
-                <img src='../image/test-version.png'></image>
-                <div class='test-version-ok' @click='versionClose'></div>
-                <div class='test-version-close' @click='versionClose'></div>
-            </div>
-            <div class="mask" v-if="testVersionShow" v-cloak></div>
         </div>
     </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/jquery-3.5.1.min.js"></script>
@@ -819,6 +836,8 @@
                     }).then(function (resp) {
                         page++;
                         that.list = that.list.concat(resp.data).unique();
+                        miniRefresh.endUpLoading(true);
+                        miniRefresh.endDownLoading();
                     }).catch(function (err) { })
                 },
                 getOtherData: function () {
@@ -1034,6 +1053,16 @@
             app.getData()
             app.getOtherData()
         });
+        api.addEventListener({
+            name: 'setRefreshHeaderInfo',
+        }, function (ret, err) {
+            app.user = $api.getStorage('user');
+            $util.user = $api.getStorage('user');
+            page = 1;
+            app.list = []
+            app.getData()
+            app.getOtherData()
+        });
         // api.addEventListener({
         //     name: 'appintent'
         // }, function (ret, err) {
@@ -1043,17 +1072,52 @@
         //     }
         // })
         // 被其他的应用唤起的时候调用的方法
-        // 下拉加载
+
+        // $('window').on('scroll', () => {
+        //     console.log('scroll');
+        // })
+        // 上拉加载
         api.addEventListener({
             name: 'scrolltobottom'
         }, function (ret, err) {
             app.getData();
         });
-        api.addEventListener({
-            name: 'viewappear'
-        }, function (ret, err) {
-            app.getParams()
-        });
+
+        // var miniRefresh = new MiniRefresh({
+        //     container: '#minirefresh',
+        //     down: {
+        //         callback: function () {
+        //             // 下拉事件
+        //             app.user = $api.getStorage('user');
+        //             $util.user = $api.getStorage('user');
+        //             page = 1;
+        //             app.list = []
+        //             app.getData()
+        //             app.getOtherData()
+
+        //             // miniRefresh.endDownLoading();
+        //         }
+        //     },
+        //     up: {
+
+        //         callback: function () {
+        //             // 上拉事件
+        //             app.getData();
+        //             // 注意，由于默认情况是开启满屏自动加载的，所以请求失败时，请务必endUpLoading(true)，防止无限请求
+
+        //             // miniRefresh.endUpLoading(true);
+        //         }
+        //     }
+        // });
+
+
+
+        // api.addEventListener({
+        //     name: 'viewappear'
+        // }, function (ret, err) {
+        //     console.log('viewappear');
+        //     app.getParams()
+        // });
     }
 </script>
 

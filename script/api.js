@@ -31,13 +31,58 @@ function apiadapter(payload) {
     @return: 不作处理.如果不想处理某个模块方法, 应该显式返回字符串 'TO_NEXT_API_ADAPTER',
     以便往上传播调用.
     */
-    console.log('method:', payload.method);
-    console.log('moduleName:', payload.moduleName);
+    if ("setRefreshHeaderInfo" === payload.method) {
+        let link = document.createElement('link');
+        link.href = "../css/minirefresh.min.css"
+        link.rel = "stylesheet"
+        document.body.appendChild(link);
+        let script = document.createElement('script');
+        script.src = "../script/minirefresh.min.js";
+        script.onload = function () {
+            // let html = document.body.innerHTML;
+            // html = `<div id="minirefresh" class="minirefresh-wrap">
+            //     <div class="minirefresh-scroll">${html}</div>
+            // </div>`
+            // document.body.innerHTML = html;
+
+            window.miniRefresh = new MiniRefresh({
+                container: '#minirefresh',
+                down: {
+                    callback: function () {
+                        // 下拉事件
+                        api.sendEvent({
+                            name: 'setRefreshHeaderInfo',
+                        });
+                        // miniRefresh.endDownLoading();
+                    }
+                },
+                up: {
+
+                    callback: function () {
+                        // 上拉事件
+                        // app.getData();
+                        api.sendEvent({
+                            name: 'scrolltobottom',
+                        });
+                        // 注意，由于默认情况是开启满屏自动加载的，所以请求失败时，请务必endUpLoading(true)，防止无限请求
+
+                        // miniRefresh.endUpLoading(true);
+                    }
+                }
+            });
+        }
+        document.body.appendChild(script);
+
+
+    }
     if (payload.moduleName === 'UILoading') {
         if (payload.method == 'closeFlower') {
             window.loadingHide();
         } else {
             window.loadingShow();
+            return {
+                id: 1,
+            }
         }
     }
 
@@ -51,6 +96,9 @@ function apiadapter(payload) {
     }
     return "TO_NEXT_API_ADAPTER";
 }
+// 异步方法的返回值,最好通过传入的 callback 和 cbId 传递.
+// 同步方法的返回值,可以直接 return 返回相关值.
+// 在处理 UI 类模块时,可在模块方法调用时添加一些自定义字段,以便于 apiadapter 能正确处理 UI 类模块的位置.如添加一个新的 parentDomId 字段,以便能自定义指定模块的父元素.
 
 
 // loading plugs
