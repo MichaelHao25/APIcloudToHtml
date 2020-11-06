@@ -16,6 +16,8 @@
     }
 </style>
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app">
         <ul class="list_kf aui-padded-10">
             <li v-for="(inx, inxkey) in lists" :key="inxkey">
@@ -25,6 +27,9 @@
             </li>
         </ul>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/util.js"></script><script type="text/javascript" src="../script/vue.min.js"></script>

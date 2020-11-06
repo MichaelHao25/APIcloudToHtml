@@ -12,6 +12,8 @@
 </head>
 
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app">
         <!-- 中间页 -->
         <div class="aui-content aui-bg_white aui-text-center aui-padded-15" style="margin-bottom:2.5rem;">
@@ -28,6 +30,9 @@
             </div>
         </footer>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/util.js"></script>
@@ -61,9 +66,13 @@
                 },
             })
             // 下拉刷新
-        api.setRefreshHeaderInfo({
+            api.setRefreshHeaderInfo({
             bgColor: '#eee',
             textColor: '#fff',
+        }, function(ret, err) {
+            loadIdcardInfo()
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
         }, function(ret, err) {
             loadIdcardInfo()
         });

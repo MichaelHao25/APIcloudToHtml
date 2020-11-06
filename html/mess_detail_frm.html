@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-06 22:22:24
+ * @FilePath: /A6001888506312/html/mess_detail_frm.html
+-->
 <!doctype html>
 <html>
 
@@ -101,6 +107,9 @@
             </div>
           </div>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/util.js"></script>
@@ -427,7 +436,20 @@
           }).then(function(resp) {
               that.lists = resp.data
           }).catch(function(err) {})
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
+        }, function(ret, err) {
+          var that = app
+          $util.ajax({
+              url: 'api_query/users/message_read',
+              data: {
+                message_id: api.pageParam.userId,
+              }
+          }).then(function(resp) {
+              that.lists = resp.data
+          }).catch(function(err) {})
         });
+        window.miniRefresh&&(window.miniRefresh.options.up.isLock = true);
     };
     function sendMsg(){
         msgData.type='message';

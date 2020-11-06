@@ -156,6 +156,8 @@
 </head>
 
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app" style="background-color:#f4f4f4;">
         <section class="aui-content aui-bg-white" id="header">
             <div id="top" :style="{ 'background': 'url(' + bgHeader + ') no-repeat center center'}">
@@ -329,6 +331,9 @@
         <div class="mask" v-if="maskShow" v-cloak>
         </div>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type='text/javascript' src='https://webchat.7moor.com/javascripts/7moorInit.js?accessId=6df22850-6fae-11e9-b30d-578324fce01a&autoShow=false&language=EN' async='async'>
 </script>
@@ -654,6 +659,14 @@
         api.setRefreshHeaderInfo({
             bgColor: '#eee',
             textColor: '#fff',
+        }, function(ret, err) {
+            app.loadOrderCount();
+            app.loadUserInfo();
+            app.getDrpDbStatus();
+            app.getParams();
+            app.getIsCloseWallet();
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
         }, function(ret, err) {
             app.loadOrderCount();
             app.loadUserInfo();

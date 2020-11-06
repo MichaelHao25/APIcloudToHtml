@@ -12,6 +12,8 @@
 </head>
 
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app">
         <div v-if="haveNoData" class="aui-col-xs-12 aui-text-center" style="margin-top:30%;">
             <img src="../image/no_content.png" style="width:18%;margin:0 auto;">
@@ -56,6 +58,9 @@
             </ul>
         </div>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/util.js"></script>
@@ -141,6 +146,12 @@
         api.setRefreshHeaderInfo({
             bgColor: '#eee',
             textColor: '#fff',
+        }, function(ret, err) {
+            app.list = [];
+            page = 1;
+            app.getData();
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
         }, function(ret, err) {
             app.list = [];
             page = 1;

@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-06 22:21:59
+ * @FilePath: /A6001888506312/html/logistics_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -64,6 +70,8 @@
 </head>
 
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app">
         <!-- 中间页 -->
         <!-- 商品信息 -->
@@ -82,6 +90,9 @@
           <div @click="check()" class="check aui-padded-15 aui-text-center">Información logística</div>
         </section>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/util.js">
@@ -169,7 +180,12 @@
             textColor: '#fff',
         }, function(ret, err) {
             app.loadLogistics();
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
+        }, function(ret, err) {
+            app.loadLogistics();
         });
+        window.miniRefresh&&(window.miniRefresh.options.up.isLock = true);
     };
 </script>
 

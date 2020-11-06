@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-06 22:01:06
+ * @FilePath: /A6001888506312/html/bind_third_setting_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -12,6 +18,8 @@
 </head>
 
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app">
         <!-- 中间页 -->
         <div class="aui-content">
@@ -47,6 +55,9 @@
             </div>
         </div>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../ali_icon/iconfont.js"></script>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -122,6 +133,10 @@
         api.setRefreshHeaderInfo({
             bgColor: '#eee',
             textColor: '#fff',
+        }, function(ret, err) {
+            app.loadThirdBindInfo();
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
         }, function(ret, err) {
             app.loadThirdBindInfo();
         });

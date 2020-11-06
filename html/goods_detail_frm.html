@@ -73,6 +73,8 @@
     </style>
 </head>
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app">
         <!-- 返回按钮 -->
         <i class="aui-iconfont aui-icon-left returni" onclick="api.closeWin();" id="header" style></i>
@@ -173,6 +175,9 @@
             </div>
         </div>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/jquery-3.5.1.min.js"></script>
@@ -573,6 +578,7 @@
         }, function(ret, err) {
             app.getData()
         });
+        window.miniRefresh&&(window.miniRefresh.options.down.isLock = true)
 
         // 监听选择规格事件
         api.addEventListener({

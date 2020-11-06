@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-06 21:59:15
+ * @FilePath: /A6001888506312/html/score_shop_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -39,6 +45,8 @@
 </head>
 
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div class="aui-content" id="app">
         <section class="aui-content aui-bg-white">
             <div class="aui-margin-5" id="top" :style="{ 'background': 'url(' + bgHeader + ') no-repeat center center'}">
@@ -111,6 +119,9 @@
             </div>
         </div>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/util.js"></script>
@@ -235,6 +246,17 @@
         api.setRefreshHeaderInfo({
             bgColor: '#eee',
             textColor: '#fff',
+        }, function(ret, err) {
+            app.list = [];
+            page = 1;
+            app.getData();
+            app.getAssetInfo();
+            app.getData();
+            app.getSignInfo();
+            app.getOrderCount();
+            app.getScoreRule()
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
         }, function(ret, err) {
             app.list = [];
             page = 1;

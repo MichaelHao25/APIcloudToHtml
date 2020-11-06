@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-06 22:03:17
+ * @FilePath: /A6001888506312/html/score_order_list_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -12,6 +18,8 @@
 </head>
 
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app">
         <!-- 中间页 -->
         <div class="aui-content">
@@ -74,6 +82,9 @@
             </div>
         </div>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/util.js"></script>
@@ -182,6 +193,12 @@
         // 下拉刷新
         api.setRefreshHeaderInfo({
             bgColor: '#fff',
+        }, function(ret, err) {
+            app.list = [];
+            page = 1;
+            app.getData();
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
         }, function(ret, err) {
             app.list = [];
             page = 1;

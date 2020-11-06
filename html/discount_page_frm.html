@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-06 21:56:34
+ * @FilePath: /A6001888506312/html/discount_page_frm.html
+-->
 <!-- 限时折扣frm -->
 <!doctype html>
 <html>
@@ -97,6 +103,8 @@
 </head>
 
 <body>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
     <div id="app">
         <!-- 中间页 -->
         <div class="aui-content">
@@ -147,6 +155,9 @@
             </div>
         </div>
     </div>
+      </div>
+    </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/jquery-3.5.1.min.js"></script>
@@ -242,6 +253,10 @@
         api.setRefreshHeaderInfo({
             bgColor: '#eee',
             textColor: '#fff',
+        }, function(ret, err) {
+            app.loadData();
+        });api.addEventListener({
+            name: 'setRefreshHeaderInfo',
         }, function(ret, err) {
             app.loadData();
         });
