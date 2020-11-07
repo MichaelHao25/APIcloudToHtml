@@ -37,7 +37,7 @@ function apiadapter(payload) {
         link.rel = "stylesheet"
         document.body.appendChild(link);
         let script = document.createElement('script');
-        script.src = "../script/minirefresh.min.js";
+        script.src = "../script/minirefresh.js";
         script.onload = function () {
             // let html = document.body.innerHTML;
             // html = `<div id="minirefresh" class="minirefresh-wrap">

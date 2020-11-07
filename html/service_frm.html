@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-07 18:50:07
+ * @FilePath: /A6001888506312/html/service_frm.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +57,7 @@
                     url: 'api_users/users/customer_lists'
                 }).then(function(resp) {
                     _this.lists = resp.data;
+                    console.log(resp.data);
                 }).catch(err => { })
             },
             gotogt(item) {

@@ -1,10 +1,17 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-07 18:45:27
+ * @FilePath: /A6001888506312/html/wallet_win.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui-flex.css" />
@@ -30,7 +37,8 @@
             width: 66.6%;
             height: 100%;
             display: flex;
-            align-items: flex-end;;
+            align-items: flex-end;
+            ;
             flex-direction: column;
             justify-content: center;
         }
@@ -53,73 +61,81 @@
 </head>
 
 <body>
-    <div id="app">
-        <div class="wrap">
-            <div class="top" :style="{ 'background': 'url(' + bgHeader + ') no-repeat center center'}">
-                <div class="wallet-left">
-                    <div style="margin-right: 4.5rem;">Saldo de cartera(Dólar)</div>
-                    <div style="margin-top: 0.5rem;margin-right:4.5rem">$
-                        <span style="font-size: 1.3rem;" v-text="money"></span>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
+            <div id="app">
+                <div class="wrap">
+                    <div class="top" :style="{ 'background': 'url(' + bgHeader + ') no-repeat center center'}">
+                        <div class="wallet-left">
+                            <div style="margin-right: 4.5rem;">Saldo de cartera(Dólar)</div>
+                            <div style="margin-top: 0.5rem;margin-right:4.5rem">$
+                                <span style="font-size: 1.3rem;" v-text="money"></span>
+                            </div>
+                        </div>
+                        <div class="wallet-right">
+                            <div style="box-sizing: border-box;width: 4rem;margin-bottom:0.4rem;height: 1.5rem;border-radius: 0.5rem;border: 0.025rem solid #fff;text-align: center;line-height: 1.5rem"
+                                 onclick="$util.openWindow('recharge_win')">Recargar</div>
+                            <div style="box-sizing: border-box;width: 7rem;height: 1.5rem;border-radius: 0.5rem;border: 0.025rem solid #fff;text-align: center;line-height: 1.5rem"
+                                 onclick="$util.openWindow('withdraw_win')">Sacar dinero</div>
+                        </div>
                     </div>
                 </div>
-                <div class="wallet-right">
-                    <div style="box-sizing: border-box;width: 4rem;margin-bottom:0.4rem;height: 1.5rem;border-radius: 0.5rem;border: 0.025rem solid #fff;text-align: center;line-height: 1.5rem" onclick="$util.openWindow('recharge_win')">Recargar</div>
-                    <div style="box-sizing: border-box;width: 7rem;height: 1.5rem;border-radius: 0.5rem;border: 0.025rem solid #fff;text-align: center;line-height: 1.5rem" onclick="$util.openWindow('withdraw_win')">Sacar dinero</div>
+                <div class="cash" onclick="$util.openWindow('withdraw_win')">
+                    <i class="aui-iconfont iconfont icon-yinhangqia"
+                       style="color: #000000;font-size: 22px;margin-right: 0.6rem"></i>
+                    <div class="">Tarjeta bancaria</div>
                 </div>
             </div>
         </div>
-        <div class="cash" onclick="$util.openWindow('withdraw_win')">
-            <i class="aui-iconfont iconfont icon-yinhangqia" style="color: #000000;font-size: 22px;margin-right: 0.6rem"></i>
-            <div class="">Tarjeta bancaria</div>
-        </div>
     </div>
+
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/util.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
 <script type="text/javascript" src="../script/fastclick.js"></script>
 <script type="text/javascript">
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         FastClick.attach(document.body);
     }, false);
     var app = {}
-    apiready = function() {
+    apiready = function () {
         $util.fixPage();
         $api.fixStatusBar($api.byId('top'));
         app = new Vue({
-                el: '#app',
-                data: {
-                    title: 'Mi cartera',
-                    money: '',
-                    bgHeader:'',
+            el: '#app',
+            data: {
+                title: 'Mi cartera',
+                money: '',
+                bgHeader: '',
+            },
+            methods: {
+                loadAsset: function () {
+                    var that = this
+                    $util.ajax({
+                        url: 'api_query/users/asset'
+                    }).then(function (resp) {
+                        that.money = resp.data.money
+                    }).catch(function (err) { })
                 },
-                methods: {
-                    loadAsset: function() {
-                        var that = this
-                        $util.ajax({
-                            url: 'api_query/users/asset'
-                        }).then(function(resp) {
-                            that.money = resp.data.money
-                        }).catch(function(err) {})
-                    },
-                    getParams:function(){
-                      var that = this
-                      $util.ajax({
-                          url: 'api_systems/params/getParams',
-                          data:{
+                getParams: function () {
+                    var that = this
+                    $util.ajax({
+                        url: 'api_systems/params/getParams',
+                        data: {
                             type: 'user_bg'
-                          }
-                      }).then(function(resp) {
-                          that.bgHeader = resp.data.my_wallet_head_img;
-                      }).catch(function(err) {})
-                    }
-                },
-                mounted: function() {
-                    this.loadAsset()
-                    this.getParams()
+                        }
+                    }).then(function (resp) {
+                        that.bgHeader = resp.data.my_wallet_head_img;
+                    }).catch(function (err) { })
                 }
-            })
-            // 下拉刷新
+            },
+            mounted: function () {
+                this.loadAsset()
+                this.getParams()
+            }
+        })
+        // 下拉刷新
         api.setRefreshHeaderInfo({
             bgColor: '#fff',
         }, function (ret, err) {
@@ -132,7 +148,7 @@
         });
         api.addEventListener({
             name: 'updateWallet'
-        }, function(ret, err) {
+        }, function (ret, err) {
             app.loadAsset()
         });
     };

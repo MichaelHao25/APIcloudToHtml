@@ -1,7 +1,7 @@
 <!--
  * @since: 2020-10-24 12:04:02
  * @LastAuthor: Blue
- * @lastTime: 2020-11-06 23:22:03
+ * @lastTime: 2020-11-07 18:45:15
  * @FilePath: /A6001888506312/html/mess_list_frm.html
 -->
 <!doctype html>
@@ -9,7 +9,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui-flex.css" />
@@ -21,33 +22,40 @@
 </head>
 
 <body style="background-color:#f4f4f4;">
-    <div id="app" >
-      <div class="aui-content aui-margin-b-15" >
-           <ul class="aui-list aui-media-list">
-               <li @click="openChat(item)" class="aui-list-item aui-list-item-middle" v-for="(item,index) in lists" :key="index">
-                   <div class="aui-media-list-item-inner">
-                       <div class="aui-list-item-media" style="width: 3rem;">
-                           <div class="aui-dot" v-show="item.status==0">
-                           </div>
-                           <img class="aui-img-round aui-list-img-sm" :src="item.avatar"/>
-                       </div>
-                       <div class="aui-list-item-inner aui-list-item-arrow">
-                           <div class="aui-list-item-text">
-                               <div class="aui-list-item-title aui-font-size-14" v-text="item.name"></div>
-                               <div class="aui-list-item-right aui-margin-r-15" style="padding-right:1rem;" v-text="item.date"></div>
-                           </div>
-                           <div class="aui-list-item-title aui-ellipsis-1" style="width:90%;font-size:0.7rem;color: #757575;" v-if="item.message_type=='text'" v-text="item.content"></div>
-                           <div class="aui-list-item-text" v-if="item.message_type=='image'">[图片]</div>
-                       </div>
-                   </div>
-               </li>
-           </ul>
-       </div>
-   </div>
+    <div id="minirefresh" class="minirefresh-wrap">
+        <div class="minirefresh-scroll">
+            <div id="app">
+                <div class="aui-content aui-margin-b-15">
+                    <ul class="aui-list aui-media-list">
+                        <li @click="openChat(item)" class="aui-list-item aui-list-item-middle"
+                            v-for="(item,index) in lists" :key="index">
+                            <div class="aui-media-list-item-inner">
+                                <div class="aui-list-item-media" style="width: 3rem;">
+                                    <div class="aui-dot" v-show="item.status==0">
+                                    </div>
+                                    <img class="aui-img-round aui-list-img-sm" :src="item.avatar" />
+                                </div>
+                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                    <div class="aui-list-item-text">
+                                        <div class="aui-list-item-title aui-font-size-14" v-text="item.name"></div>
+                                        <div class="aui-list-item-right aui-margin-r-15" style="padding-right:1rem;"
+                                             v-text="item.date"></div>
+                                    </div>
+                                    <div class="aui-list-item-title aui-ellipsis-1"
+                                         style="width:90%;font-size:0.7rem;color: #757575;"
+                                         v-if="item.message_type=='text'" v-text="item.content"></div>
+                                    <div class="aui-list-item-text" v-if="item.message_type=='image'">[图片]</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-    <div class="fb"></div>
-      </div>
+            <div class="fb"></div>
+        </div>
     </div>
+
 
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
@@ -57,23 +65,23 @@
 <!-- <script type="text/javascript" src="../script/layer-v3.1.1/layer/layer.js"></script> -->
 <script type="text/javascript" src="../script/fastclick.js"></script>
 <script type="text/javascript">
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         FastClick.attach(document.body);
     }, false);
     var app = {}
-    var chatWin={}
+    var chatWin = {}
     var socket;
-    var msgData={
-        type:'message',
-        id:$util.user.id,
-        name:$util.user.nick_name,
-        avatar:$util.user.avatar,
-        content:'',
-        message_type:'text',
+    var msgData = {
+        type: 'message',
+        id: $util.user.id,
+        name: $util.user.nick_name,
+        avatar: $util.user.avatar,
+        content: '',
+        message_type: 'text',
         to_id: '',
     };
     var ele;
-    apiready = function() {
+    apiready = function () {
         $util.fixPage();
         app = new Vue({
             el: '#app',
@@ -82,45 +90,45 @@
                 lists: [],
             },
             methods: {
-                openChat:function(item){
-                    $util.openWindow('mess_detail_win',{userId:item.id});
+                openChat: function (item) {
+                    $util.openWindow('mess_detail_win', { userId: item.id });
                 }
             },
             mounted: function () {
-              var that = this;
-              $util.ajax({
-                  url: 'api_query/users/message_lists'
-              }).then(function(resp) {
-                 console.log(JSON.stringify(resp))
-                  that.lists = resp.data
-              }).catch(function(err) {})
+                var that = this;
+                $util.ajax({
+                    url: 'api_query/users/message_lists'
+                }).then(function (resp) {
+                    console.log(JSON.stringify(resp))
+                    that.lists = resp.data
+                }).catch(function (err) { })
 
                 //建立WebSocket通讯
                 socket = new WebSocket('ws://www.177pinche.com:8100');
                 //连接成功时触发
-                socket.onopen = function(){
+                socket.onopen = function () {
                     // 登录
-                    msgData.type='init';
-                    socket.send( JSON.stringify(msgData));
+                    msgData.type = 'init';
+                    socket.send(JSON.stringify(msgData));
                     console.log("websocket握手成功!");
                 };
 
                 // 监听收到的消息
-                socket.onmessage = function(res){
+                socket.onmessage = function (res) {
                     console.log(res.data);
                     // var data = eval("("+res.data+")");
                     let data = JSON.parse(res.data);
                     let recData = data['data']
-                    switch(data['type']){
+                    switch (data['type']) {
                         // 登录 更新用户列表
                         case 'init':
-                            console.log(data['id']+"登录成功");
+                            console.log(data['id'] + "登录成功");
                             break;
                         // 检测聊天数据
                         case 'message':
                             let ishave = 0;
-                            app.lists.forEach(function(item,index){
-                                if(item.id == recData.id){
+                            app.lists.forEach(function (item, index) {
+                                if (item.id == recData.id) {
                                     app.lists[index].content = recData.content;
                                     app.lists[index].message_type = recData.message_type;
                                     app.lists[index].timeline = recData.timeline;
@@ -130,22 +138,22 @@
                                     ishave = 1;
                                 }
                             });
-                            if(!ishave){
+                            if (!ishave) {
                                 let userData = deepCopy(recData);
-                                userData.name ? '' : userData.name='匿名用户'+userData.id;
+                                userData.name ? '' : userData.name = '匿名用户' + userData.id;
                                 userData.hasMessage = 1;
-                                userData.message=[];
+                                userData.message = [];
                                 userData.message.push(recData);
                                 app.lists.push(userData);
                             }
-                            ele ? ele.click():'';
+                            ele ? ele.click() : '';
                             break;
                         // 离线消息推送
                         case 'logMessage':
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 let ishave = 0;
-                                app.lists.forEach(function(item,index){
-                                    if(item.id == recData.id){
+                                app.lists.forEach(function (item, index) {
+                                    if (item.id == recData.id) {
                                         app.lists[index].content = recData.content;
                                         app.lists[index].message_type = recData.message_type;
                                         app.lists[index].timeline = recData.timeline;
@@ -155,16 +163,16 @@
                                         ishave = 1;
                                     }
                                 });
-                                if(!ishave){
+                                if (!ishave) {
                                     let userData = deepCopy(recData);
-                                    userData.name ? '' : userData.name='匿名用户'+userData.id;
+                                    userData.name ? '' : userData.name = '匿名用户' + userData.id;
                                     userData.hasMessage = 1;
-                                    userData.message=[];
+                                    userData.message = [];
                                     userData.message.push(recData);
                                     app.lists.push(userData);
                                 }
                             }, 1000);
-                            ele ? ele.click():'';
+                            ele ? ele.click() : '';
                             break;
                         // 用户退出 更新用户列表
                         case 'logout':
@@ -180,38 +188,38 @@
         api.setRefreshHeaderInfo({
             bgColor: '#ff5656',
             textColor: '#fff',
-        }, function(ret, err) {
-          $util.ajax({
-              url: 'api_query/users/message_lists'
-          }).then(function(resp) {
-              app.lists = resp.data
-          }).catch(function(err) {})
-        });api.addEventListener({
+        }, function (ret, err) {
+            $util.ajax({
+                url: 'api_query/users/message_lists'
+            }).then(function (resp) {
+                app.lists = resp.data
+            }).catch(function (err) { })
+        }); api.addEventListener({
             name: 'setRefreshHeaderInfo',
-        }, function(ret, err) {
-          $util.ajax({
-              url: 'api_query/users/message_lists'
-          }).then(function(resp) {
-              app.lists = resp.data
-          }).catch(function(err) {})
+        }, function (ret, err) {
+            $util.ajax({
+                url: 'api_query/users/message_lists'
+            }).then(function (resp) {
+                app.lists = resp.data
+            }).catch(function (err) { })
         });
         //监听内容页面是否发送过消息
         api.addEventListener({
             name: 'refreshmess'
-        }, function(ret, err){
+        }, function (ret, err) {
             $util.ajax({
                 url: 'api_query/users/message_lists'
-            }).then(function(resp) {
+            }).then(function (resp) {
                 app.lists = resp.data
-            }).catch(function(err) {})
+            }).catch(function (err) { })
         });
 
 
     };
 
-      function deepCopy(p, c) {
+    function deepCopy(p, c) {
         return JSON.parse(JSON.stringify(p))
-      }
+    }
 </script>
 
 </html>
