@@ -12,8 +12,8 @@
         return n;
     }
     var _u = {};
-    // _u.origin = 'https://www.177pinche.com/';
-    _u.origin = 'http://t.0lz.net/';
+    _u.origin = 'https://www.177pinche.com/';
+    // _u.origin = 'http://t.0lz.net/';
     
     // _u.origin = 'http://177pinche.yznt.com/';
 

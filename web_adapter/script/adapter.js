@@ -391,15 +391,15 @@
     }
     function E() {
         var e = document.createElement("iframe");
-        return e.onload = function () {
-            var n = e
-                , t = n.contentWindow.document.createElement("script");
-            t.type = "text/javascript",
-                t.src = window.top.PUBLIC_PATH + window.top.WEB_ADAPTER_CORE_JS_PATH,
-                n.contentWindow.document.body.appendChild(t)
-        }
-            ,
-            e
+        // e.onload = function () {
+        //     var n = e
+        //         , t = n.contentWindow.document.createElement("script");
+        //     t.type = "text/javascript",
+        //         t.src = window.top.PUBLIC_PATH + window.top.WEB_ADAPTER_CORE_JS_PATH,
+        //         n.contentWindow.document.body.appendChild(t)
+        // }
+        //     ,
+        return e
     }
     function T(r) {
         var i = r.moduleName

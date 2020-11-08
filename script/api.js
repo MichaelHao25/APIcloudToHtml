@@ -4,6 +4,14 @@
  */
 
 
+// let script = document.createElement('script');
+// script.src = "../web_adapter/script/adapter.js";
+// document.body.appendChild(script);
+window.addEventListener('load', function () {
+    let script = document.createElement('script');
+    script.src = "../web_adapter/script/adapter.js";
+    document.body.appendChild(script);
+})
 
 function apiadapter(payload) {
     /* TODO: 自定义的处理逻辑. */
@@ -45,7 +53,7 @@ function apiadapter(payload) {
             // </div>`
             // document.body.innerHTML = html;
             let down = [...document.querySelectorAll('script')].findIndex(value => {
-                return value.textContent.trim().includes('\'setRefreshHeaderInfo\'')||value.textContent.trim().includes('\"setRefreshHeaderInfo\"')
+                return value.textContent.trim().includes('\'setRefreshHeaderInfo\'') || value.textContent.trim().includes('\"setRefreshHeaderInfo\"')
             })
 
             let up = [...document.querySelectorAll('script')].findIndex(value => {
@@ -80,18 +88,18 @@ function apiadapter(payload) {
                 }
             }
             if (down == -1) {
-                config.down.callback=function() {
+                config.down.callback = function () {
                     window.miniRefresh.endDownLoading(true);
 
                     let ele = document.querySelector('.minirefresh-theme-default .minirefresh-downwrap');
-                    ele&&ele.parentNode.removeChild(ele)
+                    ele && ele.parentNode.removeChild(ele)
                 };
             }
             if (up == -1) {
-                config.up.callback=function() {
+                config.up.callback = function () {
                     window.miniRefresh.endUpLoading(true);
                     let ele = document.querySelector('.minirefresh-theme-default .minirefresh-upwrap');
-                    ele&&ele.parentNode.removeChild(ele)
+                    ele && ele.parentNode.removeChild(ele)
                 };
             }
             console.log(config);
