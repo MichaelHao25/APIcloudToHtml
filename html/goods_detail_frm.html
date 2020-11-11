@@ -309,6 +309,7 @@
                 },
                 //增加购物车
                 addCart: function () {
+                    // debugger
                     if (this.load == 0) {
                         return;
                     }
@@ -393,7 +394,7 @@
                         $util.toast('No se ha seleccionado nada artículo.');
                     } else {
                         $util.openWindow('order_confirm_win', {
-                            goodsList: goodsList
+                            goodsList: JSON.stringify(goodsList)
                         });
                     }
                 },
@@ -447,8 +448,7 @@
                 },
                 // 选择规格
                 selectSpec: function (type) {
-                    var that = this
-
+                    var that = this;
                     api.openFrame({
                         name: 'goods_spec_info_select_frm',
                         url: that.isDiscountGoods ? './goods_spec_info_select_frm.html' : './goods_spec_info_last_select_frm.html',
@@ -460,7 +460,7 @@
                             marginBottom: 0,
                         },
                         pageParam: {
-                            goods: that.goods,
+                            goods: JSON.stringify(that.goods),
                             select_spec_group_info: that.select_spec_group_info,
                             type: type, //选择规格之后的操作
                         },

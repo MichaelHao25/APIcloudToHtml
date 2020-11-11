@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-11 23:37:35
+ * @FilePath: /A6001888506312/html/cart_list_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -412,11 +418,7 @@
             app.getData()
         });
         // 上拉加载
-        api.addEventListener({
-            name: 'scrolltobottom'
-        }, function(ret, err) {
-            app.getData()
-        });
+      
         // 监听全选事件
         api.addEventListener({
             name: 'selectAllCart'

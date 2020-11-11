@@ -383,9 +383,13 @@
             void 0 !== o ? p = o : void 0 !== d && (p = d);
             var w = 0;
             void 0 !== l && (w = l),
-                e.style.left = c + "px",
-                e.style.top = p + "px",
-                void 0 !== r && "auto" !== r ? e.style.width = r + "px" : e.style.right = u + "px",
+                e.style.left = c + "px";
+            if (e.name === 'goods_spec_info_select_frm') {
+                e.style.bottom = "0px";
+            } else {
+                e.style.top = p + "px";
+            }
+            void 0 !== r && "auto" !== r ? e.style.width = r + "px" : e.style.right = u + "px",
                 void 0 !== i && "auto" !== i ? e.style.height = i + "px" : e.style.bottom = w + "px"
         }
     }
@@ -569,6 +573,7 @@
                         We.style.height = U.winHeight + "px",
                         We.style.position = "fixed",
                         We.style.overflow = "scroll",
+                        We.style.zIndex = "1",
                         We.style["-webkit-overflow-scrolling"] = "touch",
                         ne && (We.style.background = ne);
                     (ve = E()).setAttribute("src", re),
@@ -644,11 +649,11 @@
                     return ae.v
             }
             if ("cancelAjax" === f) {
-                debugger
-                // if (!T.tag)
-                //     return;
-                // var de = W[T.tag];
-                // return void (de && de.abort())
+                // debugger
+                if (!T.tag)
+                    return;
+                var de = W[T.tag];
+                return void (de && de.abort())
             }
             if ("require" === f) {
                 return D[T]
@@ -765,6 +770,7 @@
                 We.name = Ne,
                     N(We, T.rect),
                     We.style.position = "fixed",
+                    We.style.zIndex = "1",
                     We.style.overflow = "scroll",
                     We.style["-webkit-overflow-scrolling"] = "touch";
                 return (ve = E()).setAttribute("src", re),
@@ -808,7 +814,23 @@
                         break
                     }
                 }
-                return void Ie.parentNode.remove()
+                try {
+                    void Ie.parentNode.remove()
+                } catch (error) {
+                    let tempWindow = window[0];
+                    let tempName = window[0].name
+                    let parWindow = null;
+                    while (tempWindow[0]) {
+                        parWindow = tempWindow;
+                        tempName = tempWindow[0].name
+                        tempWindow = tempWindow[0];
+                    }
+                    // console.log(tempWindow);
+                    // console.log(tempName);
+                    // console.log(parWindow);
+                    parWindow.document.getElementsByName(tempName)[0].parentElement.remove()
+                }
+                return;
             }
             if ("setFrameAttr" === f) {
                 var Oe = h(U.winName);

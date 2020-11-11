@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-08 22:19:10
+ * @FilePath: /A6001888506312/html/goods_spec_info_select_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -70,7 +76,7 @@
             el: '#app',
             data: {
                 // 商品信息
-                goods: api.pageParam.goods,
+                goods: JSON.parse(api.pageParam.goods),
                 // 选择的规格组信息
                 select_spec_group_info: api.pageParam.select_spec_group_info || {},
             },

@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-10 23:08:52
+ * @FilePath: /A6001888506312/html/address_edit_frm.html
+-->
 <!doctype html>
 <html>
 
@@ -161,7 +167,7 @@
                         return;
                     };
                      console.log(JSON.stringify(this.address))
-                    router = api.pageParam.addressId ? 'api_users/addresses/update' : 'api_users/addresses/save'
+                    router = api.pageParam.addressId!='undefined' ? 'api_users/addresses/update' : 'api_users/addresses/save'
                     $util.ajax({
                         url: router,
                         data: this.address,
