@@ -1,9 +1,16 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-15 18:32:43
+ * @FilePath: /A6001888506312/html/setting_frm.html
+-->
 <!doctype html>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <link rel="stylesheet" type="text/css" href="../css/aui.css" />
     <link rel="stylesheet" type="text/css" href="../css/aui-flex.css" />
@@ -13,49 +20,55 @@
 <body>
     <div id="minirefresh" class="minirefresh-wrap">
         <div class="minirefresh-scroll">
-    <div id="app">
-        <div class="aui-content aui-margin-b-10">
-            <ul class="aui-list aui-list-in aui-margin-b-5">
-                <li class="aui-list-item" tapmode @click="modify('avatar');">
-                    <div class="<aui-list-it></aui-list-it>em-media">
-                        <img :src="user.avatar" class="aui-img-round aui-list-img-sm" id="avatar">
-                        <input @change="fileChange($event)" type="file" id="upload_file" style="display: none">
-                    </div>
-                    <div class="aui-list-item-inner aui-list-item-arrow" style="width:100%;">
-                        <div class="aui-list-item-right aui-text-right" style="font-size:0.8rem;color:#999;width:100%;max-width: 100%;">Cambiar imagen</div>
-                    </div>
-                </li>
-                <li class="aui-list-item" tapmode @click="modify('nickname')">
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        <div class="aui-list-item-title">Apodo</div>
-                        <div class="aui-list-item-right" style="font-size:0.8rem;color:#999;" v-text="user.nick_name || 'Usuario anónimo'"></div>
-                    </div>
-                </li>
-                <li class="aui-list-item" tapmode @click="modify('email')">
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        <div class="aui-list-item-title">Correo electrónico</div>
-                        <div class="aui-list-item-right" style="font-size:0.8rem;color:#999;" v-text="user.email"></div>
-                    </div>
-                </li>
-                <li class="aui-list-item" tapmode @click="modify('mobile')">
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        <div class="aui-list-item-title">Número de teléfono</div>
-                        <div class="aui-list-item-right" style="font-size:0.8rem;color:#999;" v-text="user.mobile"></div>
-                    </div>
-                </li>
-                <li class="aui-list-item" tapmode @click="passwordSetting()">
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        Configuración de contraseñas
-                    </div>
-                </li>
-                <li class="aui-list-item" tapmode onclick="$util.openWindow('fingerprint_win')" v-if='isCloseWallet'>
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        Pago de huellas
-                    </div>
-                </li>
-            </ul>
+            <div id="app">
+                <div class="aui-content aui-margin-b-10">
+                    <ul class="aui-list aui-list-in aui-margin-b-5">
+                        <li class="aui-list-item" tapmode @click="injectUplpadFile();">
+                            <div class="aui-list-item-media">
+                                <img :src="user.avatar" class="aui-img-round aui-list-img-sm" id="avatar">
+                                <input @change="fileChange($event)" type="file" id="upload_file" style="display: none">
+                            </div>
+                            <div class="aui-list-item-inner aui-list-item-arrow" style="width:100%;">
+                                <div class="aui-list-item-right aui-text-right"
+                                     style="font-size:0.8rem;color:#999;width:100%;max-width: 100%;">Cambiar imagen
+                                </div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item" tapmode @click="modify('nickname')">
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                <div class="aui-list-item-title">Apodo</div>
+                                <div class="aui-list-item-right" style="font-size:0.8rem;color:#999;"
+                                     v-text="user.nick_name || 'Usuario anónimo'"></div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item" tapmode @click="modify('email')">
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                <div class="aui-list-item-title">Correo electrónico</div>
+                                <div class="aui-list-item-right" style="font-size:0.8rem;color:#999;"
+                                     v-text="user.email"></div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item" tapmode @click="modify('mobile')">
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                <div class="aui-list-item-title">Número de teléfono</div>
+                                <div class="aui-list-item-right" style="font-size:0.8rem;color:#999;"
+                                     v-text="user.mobile"></div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item" tapmode @click="passwordSetting()">
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                Configuración de contraseñas
+                            </div>
+                        </li>
+                        <li class="aui-list-item" tapmode onclick="$util.openWindow('fingerprint_win')"
+                            v-if='isCloseWallet'>
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                Pago de huellas
+                            </div>
+                        </li>
+                    </ul>
 
-            <!-- <ul class="aui-list aui-list-in aui-margin-b-5">
+                    <!-- <ul class="aui-list aui-list-in aui-margin-b-5">
                 <li class="aui-list-item" tapmode onclick="$util.openWindow('bind_third_setting_win')">
                     <div class="aui-list-item-inner aui-list-item-arrow">
                         <div class="aui-list-item-title">第三方账号绑定</div>
@@ -63,25 +76,29 @@
                 </li>
             </ul> -->
 
-            <ul class="aui-list aui-list-in aui-margin-b-10">
-                <li class="aui-list-item" tapmode onclick="$util.openWindow('help_and_option_win')">
-                    <div class="aui-list-item-inner aui-list-item-arrow">
-                        <div class="aui-list-item-title">Calificar esta aplicación</div>
+                    <ul class="aui-list aui-list-in aui-margin-b-10">
+                        <li class="aui-list-item" tapmode onclick="$util.openWindow('help_and_option_win')">
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                <div class="aui-list-item-title">Calificar esta aplicación</div>
+                            </div>
+                        </li>
+                        <li class="aui-list-item">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-title" style="width:75%;">Changsha Network abre cientos de
+                                    millones de páginas web Technology Co</div>
+                                <div class="aui-list-item-right" style="font-size:0.8rem;color:#999;"
+                                     v-text="appVersion"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="area">
+                        <div class="submit" tapmode @click="logout()" :style="{ backgroundColor: themeColor }">
+                            Desconectar</div>
                     </div>
-                </li>
-                <li class="aui-list-item">
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-title" style="width:75%;">Changsha Network abre cientos de millones de páginas web Technology Co</div>
-                        <div class="aui-list-item-right" style="font-size:0.8rem;color:#999;" v-text="appVersion"></div>
-                    </div>
-                </li>
-            </ul>
-            <div class="area">
-                <div class="submit" tapmode @click="logout()" :style="{ backgroundColor: themeColor }">Desconectar</div>
+                </div>
+                <input type="file" ref='upload' accept="image/*" style="display: none;" v-on:change="handleChange">
             </div>
         </div>
-    </div>
-      </div>
     </div>
 
 </body>
@@ -90,28 +107,28 @@
 <script type="text/javascript" src="../script/vue.min.js"></script>
 <script type="text/javascript" src="../script/fastclick.js"></script>
 <script type="text/javascript">
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
         FastClick.attach(document.body);
     }, false);
     var app = {}
     var FNImageClip = {}
     var avatarDom = document.getElementById('avatar');
     avatarDom.style.cssText += 'height:' + avatarDom.offsetWidth + 'px;';
-    updateAjax = function(data) {
+    updateAjax = function (data) {
         $util.ajax({
             url: 'api_users/users/update',
             data: data,
             isLoading: true,
-        }).then(function(resp) {
+        }).then(function (resp) {
             resp.data.avatar = resp.data.avatar ? resp.data.avatar : '../image/avatar.png';
             app.user = resp.data;
             $api.setStorage('user', resp.data);
             api.sendEvent({
                 name: 'updateUser',
             });
-        }).catch(function(err) {})
+        }).catch(function (err) { })
     }
-    apiready = function() {
+    apiready = function () {
         FNImageClip = api.require('FNImageClip');
         $util.fixPage();
         app = new Vue({
@@ -121,15 +138,15 @@
                 genders: ['Confidencialidad', 'Hombres', 'Mujeres'],
                 appVersion: '',
                 isClipImg: false,
-                themeColor:'',
-                isCloseWallet:true
+                themeColor: '',
+                isCloseWallet: true
             },
             methods: {
-                logout: function() {
+                logout: function () {
                     api.confirm({
                         title: '¿Va a salir?',
                         buttons: ['Sí', 'No']
-                    }, function(ret, err) {
+                    }, function (ret, err) {
                         if (ret.buttonIndex == 1) {
                             var touchStatus = $api.getStorage('touchStatus');
                             $api.clearStorage();
@@ -143,13 +160,13 @@
                     });
 
                 },
-                modify: function(type) {
+                modify: function (type) {
                     if (type == 'nickname') {
                         api.prompt({
                             buttons: ['OK', 'Cancelar'],
                             title: 'Introduzca un nuevo apodo',
                             text: $util.user.nick_name || ''
-                        }, function(ret, err) {
+                        }, function (ret, err) {
                             if (ret) {
                                 if (ret.buttonIndex == 1 && ret.text) {
                                     updateAjax({
@@ -165,7 +182,7 @@
                             title: 'Elige',
                             cancelTitle: 'Cancelar',
                             buttons: ['Confidencialidad', 'Hombres', 'Mujeres']
-                        }, function(ret, err) {
+                        }, function (ret, err) {
                             if (ret.buttonIndex == 4) {
                                 return;
                             }
@@ -176,15 +193,15 @@
                     } else if (type == 'mobile') {
                         $util.openWindow('modify_mobile_win');
                     }
-                    else if(type == 'email'){
+                    else if (type == 'email') {
                         $util.openWindow('modify_email_win');
                     }
-                     else if (type == 'avatar') {
+                    else if (type == 'avatar') {
                         var that = this
                         api.actionSheet({
                             cancelTitle: 'Cancelar',
                             buttons: ['Mis fotografías', 'Biblioteca de fotos']
-                        }, function(ret, err) {
+                        }, function (ret, err) {
                             var index = ['', 'camera', 'library'];
                             if (ret.buttonIndex == 3) {
                                 return
@@ -198,7 +215,7 @@
                                 quality: 100,
                                 saveToPhotoAlbum: false,
                                 targetWidth: 500,
-                            }, function(ret, err) {
+                            }, function (ret, err) {
                                 if (ret && ret.data) {
                                     that.clipImg(ret.data)
                                 }
@@ -206,8 +223,15 @@
                         });
                     }
                 },
-                uploadFile: function(src){
+                handleChange(e) {
+                    this.uploadFile(e.target.files[0])
+                },
+                injectUplpadFile() {
+                    this.$refs.upload.click()
+                },
+                uploadFile: function (src) {
                     var that = this
+
                     $util.ajax({
                         url: 'api_systems/helper/upload_file',
                         type: 'files',
@@ -219,19 +243,19 @@
                             is_rename: 1
                         },
                         isLoading: true,
-                    }).then(function(ret) {
+                    }).then(function (ret) {
                         updateAjax({
                             avatar: ret.data.host_file_path
                         })
-                    }).catch(function(err) {})
+                    }).catch(function (err) { })
                 },
-                saveClip: function() {
+                saveClip: function () {
                     var that = this;
                     FNImageClip.save({
                         destPath: 'fs://imageClip/result.png',
                         copyToAlbum: false,
                         quality: 1
-                    }, function(ret, err) {
+                    }, function (ret, err) {
                         if (ret) {
                             api.sendEvent({
                                 name: 'changeIsEdit',
@@ -246,7 +270,7 @@
                         }
                     });
                 },
-                clipImg: function(src) {
+                clipImg: function (src) {
                     FNImageClip.open({
                         rect: {
                             x: 0,
@@ -268,7 +292,7 @@
                             }
                         },
                         fixedOn: api.frameName
-                    }, function(ret, err) {
+                    }, function (ret, err) {
                         if (ret) {
                             // alert(JSON.stringify(ret));
                             api.sendEvent({
@@ -283,66 +307,66 @@
                         }
                     });
                 },
-                passwordSetting: function() {
-                    if(this.isCloseWallet){
-                      api.actionSheet({
-                          title: 'Elige',
-                          cancelTitle: 'Cancelar',
-                          buttons: ['Cambiar contraseña','Restablecer contraseña', 'Cambiar contraseña de pago','Restablecer contraseña de pago']
-                      }, function(ret, err) {
-                          console.log(ret.buttonIndex)
-                          if (ret.buttonIndex==1||ret.buttonIndex==3) {
-                              $util.openWindow('reset_password_win', {
-                                  type: ret.buttonIndex
-                              })
-                          }else if(ret.buttonIndex==2||ret.buttonIndex==4){
-                            $util.openWindow('rest_passwor_email_win',{
-                              type: ret.buttonIndex
-                            });
-                          }
-                      });
-                    }else{
-                      api.actionSheet({
-                          title: 'Elige',
-                          cancelTitle: 'Cancelar',
-                          buttons: ['Cambiar contraseña']
-                      }, function(ret, err) {
-                          if (ret.buttonIndex != 2) {
-                              $util.openWindow('reset_password_win', {
-                                  type: ret.buttonIndex
-                              })
-                          }
-                      });
+                passwordSetting: function () {
+                    if (this.isCloseWallet) {
+                        api.actionSheet({
+                            title: 'Elige',
+                            cancelTitle: 'Cancelar',
+                            buttons: ['Cambiar contraseña', 'Restablecer contraseña', 'Cambiar contraseña de pago', 'Restablecer contraseña de pago']
+                        }, function (ret, err) {
+                            console.log(ret.buttonIndex)
+                            if (ret.buttonIndex == 1 || ret.buttonIndex == 3) {
+                                $util.openWindow('reset_password_win', {
+                                    type: ret.buttonIndex
+                                })
+                            } else if (ret.buttonIndex == 2 || ret.buttonIndex == 4) {
+                                $util.openWindow('rest_passwor_email_win', {
+                                    type: ret.buttonIndex
+                                });
+                            }
+                        });
+                    } else {
+                        api.actionSheet({
+                            title: 'Elige',
+                            cancelTitle: 'Cancelar',
+                            buttons: ['Cambiar contraseña']
+                        }, function (ret, err) {
+                            if (ret.buttonIndex != 2) {
+                                $util.openWindow('reset_password_win', {
+                                    type: ret.buttonIndex
+                                })
+                            }
+                        });
                     }
                 },
-                getParams: function() {
+                getParams: function () {
                     var that = this
                     $util.ajax({
                         url: 'api_systems/Params/getParams',
                         data: {
                             type: "basic",
                         }
-                    }).then(function(resp) {
+                    }).then(function (resp) {
                         resp.data.wap_login_logo = resp.data.wap_login_logo
                         that.params = resp.data
                         that.themeColor = resp.data.basic_color;
-                    }).catch(function(err) {})
+                    }).catch(function (err) { })
                 },
-                getIsCloseWallet:function(){
-                  var that = this
-                  // 查询是否设置了支付密码
-                  $util.ajax({
-                      url: 'api_query/users/is_set_pay_password'
-                  }).then(function (resp) {
-                    if(resp.data.is_set_pay_password === 1){
-                      that.isCloseWallet = true;
-                    }else{
-                      that.isCloseWallet = false;
-                    }
-                  })
+                getIsCloseWallet: function () {
+                    var that = this
+                    // 查询是否设置了支付密码
+                    $util.ajax({
+                        url: 'api_query/users/is_set_pay_password'
+                    }).then(function (resp) {
+                        if (resp.data.is_set_pay_password === 1) {
+                            that.isCloseWallet = true;
+                        } else {
+                            that.isCloseWallet = false;
+                        }
+                    })
                 },
             },
-            mounted: function() {
+            mounted: function () {
                 this.getParams();
                 this.appVersion = api.appVersion;
                 this.getIsCloseWallet()
@@ -350,7 +374,7 @@
         })
         api.addEventListener({
             name: 'saveClip'
-        }, function(ret, err) {
+        }, function (ret, err) {
             app.saveClip()
         });
     };

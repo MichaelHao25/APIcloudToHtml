@@ -637,6 +637,9 @@
                         var f = new FormData;
                         for (var v in i.values)
                             f.append(v, i.values[v]);
+                            if(i.files){
+                                f.append('file', i.files.file);   
+                            }
                         m = f
                     }
                     return i && i.body && (m = "string" == typeof i.body ? i.body : JSON.stringify(i.body)),
