@@ -1038,6 +1038,15 @@
                 this.getData()
                 this.getOtherData()
                 this.getParams();
+                let result = JSON.parse(localStorage.getItem('global_shareInfo'))
+                if(result.id){
+                    $util.openWindow('goods_detail_win', {
+                        // 传入商品id和隐藏加入购物车按钮
+                        goodsId: result.id,
+                        showAddCard:false
+                        // isDiscountGoods:false,
+                    })
+                }
             }
         });
         // 下拉刷新

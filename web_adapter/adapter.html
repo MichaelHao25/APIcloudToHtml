@@ -1,7 +1,7 @@
 <!--
     * @since: 2020-10-24 12:04:02
  * @LastAuthor: Blue
- * @lastTime: 2020-11-07 20:17:44
+ * @lastTime: 2020-11-25 21:37:03
  * @FilePath: /A6001888506312/web_adapter/adapter.html
 -->
 <!doctype html>
@@ -13,6 +13,14 @@
           content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title></title>
+    <script>
+        // http://192.168.123.112:8080/A6001888506312/web_adapter/adapter.html?goodsId=925&id=925&shareCode=OTI1OjUzMTQ%3D
+        let url = new URL(location.href);
+        localStorage.setItem('global_shareInfo',JSON.stringify({
+            id:url.searchParams.get('id'),
+            shareCode:url.searchParams.get('shareCode'),
+        }))
+    </script>
 </head>
 
 <body>
@@ -21,8 +29,7 @@
     <script type="text/javascript" src="script/config.js"></script>
     <script type="text/javascript" src="script/myadapter.js"></script>
     <script type="text/javascript" src="script/adapter.js"></script>
-    <script>
-    </script>
+    
 </body>
 
 </html>

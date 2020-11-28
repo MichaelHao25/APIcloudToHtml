@@ -386,12 +386,13 @@
                     })
                 }, 500)
             } else {
+                debugger
                 api.prompt({
                     title: 'Introduzca la contraseña de pago',
                     type: 'password',
                     buttons: ['Confirmar', 'Cancelar']
                 }, function(ret, err) {
-                    if (ret.buttonIndex == 1) {
+                    if (ret.buttonIndex == 2) {
                         $util.ajax({
                             url: 'api_orders/pay/money',
                             data: {
@@ -503,6 +504,7 @@
             },
             methods: {
                 submit: function() {
+                
                     if (this.activeTabName == 'wechat') {
                         //微信支付
                         payByWx(this.order);
@@ -510,6 +512,7 @@
                         //支付宝支付
                         payByAli(this.order);
                     } else if (this.activeTabName == 'yue') {
+                        
                         payByYuE(this.order);
                     } else if (this.activeTabName == 'paypal') {
                         payByPaypal(this.order);

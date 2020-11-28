@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-10-24 12:04:02
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-25 21:48:38
+ * @FilePath: /A6001888506312/html/order_confirm_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -275,12 +281,25 @@
                         market_activity_id: this.selectedMarketActivity.id || 0,
                         memo: this.message
                     };
+                    // 分享逻辑
+                    // orderData[0].goods_id 当前商品的id
+                    // 使用地址栏携带的id和当前商品进行比对,如果OK的话就附带上邀请码不OK的话就不附带了.
+                    let result = JSON.parse(localStorage.getItem('global_shareInfo'))
+                    if (result.id) {
+                        if(orderData[0].goods_id==result.id){
+                            apiData.shareCode = result.shareCode;
+                        }
+                    }
+                    // 分享的逻辑
                     //alert(JSON.stringify(apiData))
                     $util.ajax({
                         url: 'api_orders/orders/save',
                         data: apiData,
                         isLoading: true,
                     }).then(function (resp) {
+                        // 分享完毕后清除当前的分享信息
+                        localStorage.removeItem('global_shareInfo')
+                        // 分享完毕后清除当前的分享信息
                         $util.toast(resp.msg);
                         setTimeout(function () {
                             $util.openWindow('pay_select_win', {

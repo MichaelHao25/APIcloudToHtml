@@ -395,6 +395,7 @@
     }
     function E() {
         var e = document.createElement("iframe");
+        // e.sandbox="allow-scripts allow-same-origin";
         // e.onload = function () {
         //     var n = e
         //         , t = n.contentWindow.document.createElement("script");
@@ -428,8 +429,19 @@
                 return window.innerWidth || window.document.documentElement.clientWidth || window.document.body.clientWidth;
             if ("frameHeight" === f)
                 return window.frameElement ? parseFloat(window.frameElement.parentNode.style.height) : document.documentElement.clientHeight || document.body.clientHeight;
-            if ("pageParam" === f)
-                return t(window.location.search);
+            if ("pageParam" === f) {
+                // debugger
+                var key = api.frameName || api.winName;
+                var value = localStorage.getItem(key);
+                if (value === 'undefined') {
+                    value = "{}"
+                }
+                if (value === null) {
+                    value = "{}"
+                }
+                return JSON.parse(value);
+                // return t(window.location.search);
+            }
             if ("appParam" === f)
                 return t(window.top.location.search);
             if ("wgtParam" === f)
@@ -551,12 +563,19 @@
                 }, null, !0)
             }
             if ("openWin" === f) {
+                // console.log(T);
+                // debugger
                 var K = T.url
                     , ee = T.name
                     , ne = T.bgColor
                     , te = T.reload;
                 Ee = (Ee = T.pageParam) || {},
                     K = e(K);
+                if ('{}' !== JSON.stringify(Ee)) {
+                    // 有参数
+                    localStorage.setItem(T.name, JSON.stringify(Ee));
+                    Ee = {};
+                }
                 var oe = h(ee)
                     , re = n({
                         url: K,
@@ -637,9 +656,9 @@
                         var f = new FormData;
                         for (var v in i.values)
                             f.append(v, i.values[v]);
-                            if(i.files){
-                                f.append('file', i.files.file);   
-                            }
+                        if (i.files) {
+                            f.append('file', i.files.file);
+                        }
                         m = f
                     }
                     return i && i.body && (m = "string" == typeof i.body ? i.body : JSON.stringify(i.body)),
@@ -652,7 +671,6 @@
                     return ae.v
             }
             if ("cancelAjax" === f) {
-                // debugger
                 if (!T.tag)
                     return;
                 var de = W[T.tag];
@@ -754,11 +772,18 @@
                 return void (be && be.remove())
             }
             if ("openFrame" === f) {
+                // console.log(T);
+                // debugger
                 var ne = T.bgColor
                     , Ne = T.name
                     , Ee = T.pageParam
                     , te = T.reload;
                 K = e(K = T.url);
+                if ('{}' !== JSON.stringify(Ee)) {
+                    // 有参数
+                    localStorage.setItem(T.name, JSON.stringify(Ee));
+                    Ee = {};
+                }
                 var Te = g(oe = h(U.winName), Ne)
                     , re = n({
                         url: K,

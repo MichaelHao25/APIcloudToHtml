@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-11-27 21:10:19
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-29 01:17:10
+ * @FilePath: /A6001888506312/html/goods_detail_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -74,6 +80,58 @@
             background-color: rgba(0, 0, 0, 0) !important;
         }
     </style>
+    <style>
+        /*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+        .layout {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background: rgba(0, 0, 0, .3);
+            z-index: 999;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .layoutContainer {
+            max-width: 300px;
+            max-height: 300px;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .layout-tc {
+            text-align: center;
+        }
+
+        .layout-url {
+            padding: 10px;
+            word-break: break-all;
+            text-align: justify;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+    </style>
 </head>
 
 <body>
@@ -104,7 +162,8 @@
                                       style="text-decoration: line-through;"></span>
                             </div>
                             <div class="aui-list-item-right aui-font-size-14 aui-text-white"
-                                 style="max-width:60% !important;">Terminar en
+                                 style="max-width:60% !important;">
+                                Terminar en
                                 {{discountActivity.deadline | timeFilter}}</div>
                         </div>
                     </li>
@@ -114,6 +173,7 @@
                     <h1 class="aui-text-price" v-if="!discountActivity.id">
                         <span class="aui-font-size-14">$</span>
                         <span v-text="goods.sell_price"></span>
+                        <div style="float: right;font-size: 24px;" v-if="isShare" @click="openLayout()">Compartir</div>
                     </h1>
                     <h3 v-text="goods.name" class="aui-padded-t-5"></h3>
                     <div>{{goods.id}}</div>
@@ -186,7 +246,8 @@
                                 <span v-else-if="comment.score == 3"
                                       style="margin-left: 6rem;color: #757575;">Evaluación central</span>
                                 <span v-else-if="comment.score <= 2"
-                                      style="margin-left: 6rem;color: #757575;">Evaluación diferencial</span>
+                                      style="margin-left: 6rem;color: #757575;">Evaluación
+                                    diferencial</span>
                             </div>
                             <div class="aui-list-item-text aui-padded-t-5 aui-padded-b-5" v-text="comment.content"
                                  style="word-break: break-all;"></div>
@@ -197,6 +258,14 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="layout" v-if="layout">
+                    <div class="layoutContainer">
+                        <h3 class="layout-tc">Para copiar este sitio web, mantener el enlace presionado</h3>
+                        <p class="layout-tc layout-url" v-text="shareAddress"></p>
+                        <div class="layout-tc" style="margin-top:10px;" @click="hideLayout()">Cerrar</div>
                     </div>
                 </div>
             </div>
@@ -210,7 +279,9 @@
 <script type="text/javascript" src="../script/util.js"></script>
 <script type="text/javascript" src="../script/vue.min.js"></script>
 <script type="text/javascript" src="../script/fastclick.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script> -->
 <script type="text/javascript">
+    
     window.addEventListener('load', function () {
         FastClick.attach(document.body);
     }, false);
@@ -218,6 +289,7 @@
     var app = {}
     var page = 1;
     apiready = function () {
+        console.log(api);
         $util.fixPage();
         photoBrowser = api.require("photoBrowser");
         var activity = api.require('UILoading');
@@ -249,8 +321,38 @@
                 },
                 isDiscountGoods: api.pageParam.isDiscountGoods,
                 load: 0,
+                shareAddress: '',
+                layout: false,
+                isShare: false,
             },
             methods: {
+                // rawCopyContent(content) {
+                //     let copyDom = document.createElement("textarea");
+                //     copyDom.value = content;
+                //     copyDom.style.position = "absolute";
+                //     copyDom.style.left = "100px";
+                //     copyDom.style.top = "0px";
+                //     copyDom.style.zIndex = "100";
+                //     document.getElementsByTagName("body")[0].appendChild(copyDom);
+                //     let range = document.createRange();
+                //     range.selectNode(copyDom);
+                //     window.getSelection().removeAllRanges();
+                //     window.getSelection().addRange(range);
+                //     let successful = document.execCommand('copy');
+                //     try {
+                //         console.log('Copy command run : ' + (successful ? "succeed" : "failed"));
+                //     } catch (err) {
+                //         console.log('Oops , unable to copy!');
+                //     }
+                //     document.getElementsByTagName("body")[0].removeChild(copyDom);
+                // },
+                openLayout() {
+                    // this.rawCopyContent('dasdas')
+                    this.layout = true;
+                },
+                hideLayout() {
+                    this.layout = false;
+                },
                 //切换tab
                 changeTab: function (flag) {
                     this.firstTabActive = flag;
@@ -288,6 +390,7 @@
                         this.selectSpec('buy');
                     } else {
                         if (api.pageParam.isDiscountGoods) {
+                            //   localStorage.setItem('order_confirm_win', JSON.stringify())
                             $util.openWindow('order_confirm_win', {
                                 isDiscountGoods: api.pageParam.isDiscountGoods,
                                 goodsList: [{
@@ -297,6 +400,7 @@
                                 }]
                             })
                         } else {
+                            // localStorage.setItem('order_confirm_win', JSON.stringify())
                             $util.openWindow('order_confirm_win', {
                                 goodsList: [{
                                     goods_info: this.goods,
@@ -309,7 +413,6 @@
                 },
                 //增加购物车
                 addCart: function () {
-                    // debugger
                     if (this.load == 0) {
                         return;
                     }
@@ -512,6 +615,12 @@
                         },
                         isLoading: true,
                     }).then(function (resp) {
+                        console.log(resp.data.id, resp.data.shareCode);
+                        const address = new URL(window.location.href);
+                        address.searchParams.set('id', resp.data.id)
+                        address.searchParams.set('shareCode', resp.data.shareCode)
+                        address.pathname = 'A6001888506312/web_adapter/adapter.html';
+                        that.shareAddress = address.toString();
                         resp.data.spec_group_info = resp.data.spec_group_info.map(function (item) {
                             item.spec_option_group = item.spec_option_group.split('_').sort().toString();
                             return item;
@@ -596,13 +705,17 @@
             mounted: function () {
                 this.loadGoods()
                 this.getData()
+                if ($util.user) {
+                    this.isShare = true;
+                }
+
             }
         })
         api.setRefreshHeaderInfo({
             bgColor: '#eee',
             textColor: '#fff',
-        }, function(ret, err) {
-          
+        }, function (ret, err) {
+
         });
         api.addEventListener({
             name: 'scrolltobottom'

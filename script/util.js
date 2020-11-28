@@ -12,9 +12,9 @@
         return n;
     }
     var _u = {};
-    _u.origin = 'https://www.177pinche.com/';
-    // _u.origin = 'http://t.0lz.net/';
-    
+    // _u.origin = 'https://www.177pinche.com/';
+    _u.origin = 'http://t.0lz.net/';
+
     // _u.origin = 'http://177pinche.yznt.com/';
 
     //  _u.origin = 'http://wancllshop.lugu110.wancll.vip/';
@@ -138,11 +138,21 @@
                         _u.log(options.url)
                         reject(ret)
                     } else if (ret.code == 1) {
-                        if(ret.data<10){
-                            window.miniRefresh&&(window.miniRefresh.options.up.isLock = true);
-                            window.miniRefresh&&window.miniRefresh.endUpLoading(true);
-                        }else{
-                            window.miniRefresh&&(window.miniRefresh.options.up.isLock = false);
+                        if (ret.data.length < 10) {
+                            // 当数据小于10
+                            window.miniRefresh && (window.miniRefresh.options.up.isLock = true);
+                            window.miniRefresh && window.miniRefresh.endUpLoading(true);
+                        } else {
+                            if (ret.data instanceof Object) {
+                                // 判断data是否为object
+                                if (ret.data.applys < 10) {
+                                    // ret.data.applys
+                                    window.miniRefresh && (window.miniRefresh.options.up.isLock = true);
+                                    window.miniRefresh && window.miniRefresh.endUpLoading(true);
+                                }
+                            } else {
+                                window.miniRefresh && (window.miniRefresh.options.up.isLock = false);
+                            }
                         }
                         resolve(ret);
                     } else {
@@ -155,8 +165,8 @@
                     _u.log(err)
                     reject(err)
                 }
-                window.miniRefresh&&window.miniRefresh.endDownLoading(true);
-                window.miniRefresh&&window.miniRefresh.endUpLoading(true);
+                window.miniRefresh && window.miniRefresh.endDownLoading(true);
+                window.miniRefresh && window.miniRefresh.endUpLoading(true);
             });
         })
     }
