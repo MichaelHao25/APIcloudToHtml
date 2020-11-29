@@ -1,7 +1,7 @@
 <!--
  * @since: 2020-10-24 12:04:02
  * @LastAuthor: Blue
- * @lastTime: 2020-11-27 23:12:44
+ * @lastTime: 2020-11-29 11:09:35
  * @FilePath: /A6001888506312/html/goods_detail_win.html
 -->
 <!-- 模型win -->
@@ -128,8 +128,7 @@
             mounted: function () {
                 var that = this
                 that.isDiscountGoods = api.pageParam.isDiscountGoods ? api.pageParam.isDiscountGoods : api.pageParam.showAddCard;
-
-
+                // showAddCard ==true 的话不显示按钮
                 if ($util.user) {
                     $util.ajax({
                         url: 'api_query/goods/is_collect',
