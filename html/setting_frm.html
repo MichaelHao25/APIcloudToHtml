@@ -1,7 +1,7 @@
 <!--
  * @since: 2020-10-24 12:04:02
  * @LastAuthor: Blue
- * @lastTime: 2020-11-15 18:32:43
+ * @lastTime: 2020-11-29 18:25:44
  * @FilePath: /A6001888506312/html/setting_frm.html
 -->
 <!doctype html>
@@ -168,7 +168,7 @@
                             text: $util.user.nick_name || ''
                         }, function (ret, err) {
                             if (ret) {
-                                if (ret.buttonIndex == 1 && ret.text) {
+                                if (ret.buttonIndex == 2 && ret.text) {
                                     updateAjax({
                                         nick_name: ret.text
                                     })

@@ -359,7 +359,7 @@
                     </div>
                 </div>
                 <!-- 中间页 -->
-                <div class="aui-content" style="display: none;">
+                <div class="aui-content" style="opacity: 0;">
                     <!-- 轮播 -->
                     <div class="owl-carousel owl-theme" id="owl-carousel1">
                         <div class="item" v-for="(banner,key) in banners" key="key">
@@ -835,7 +835,9 @@
                     }).then(function (resp) {
                         page++;
                         that.list = that.list.concat(resp.data).unique();
-                        $('.aui-content').fadeIn();
+                        $('.aui-content').css({
+                            opacity: 1
+                        });
                         miniRefresh.endUpLoading(true);
                         miniRefresh.endDownLoading();
                     }).catch(function (err) { })
@@ -1040,11 +1042,11 @@
                 this.getOtherData()
                 this.getParams();
                 let result = JSON.parse(localStorage.getItem('global_shareInfo'))
-                if(result.id){
+                if (result.id) {
                     $util.openWindow('goods_detail_win', {
                         // 传入商品id和隐藏加入购物车按钮
                         goodsId: result.id,
-                        showAddCard:true
+                        showAddCard: true
                         // isDiscountGoods:false,
                     })
                 }

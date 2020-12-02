@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-11-06 22:04:38
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-29 18:24:11
+ * @FilePath: /A6001888506312/html/distribution_withdraw_apply_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -117,7 +123,7 @@
                                 title: 'Introduzca la contraseña de pago',
                                 buttons: ['Confirmar', 'Cancelar']
                             }, function(ret, err) {
-                                if (ret.buttonIndex == 1 && ret.text) {
+                                if (ret.buttonIndex == 2 && ret.text) {
                                     console.log(ret.text);
                                     console.log(resp.data.is_set_pay_password);
                                     // if (ret.text != resp.data.is_set_pay_password) {

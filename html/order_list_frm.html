@@ -1,3 +1,9 @@
+<!--
+ * @since: 2020-11-06 22:40:43
+ * @LastAuthor: Blue
+ * @lastTime: 2020-11-29 18:25:38
+ * @FilePath: /A6001888506312/html/order_list_frm.html
+-->
 <!-- 模型frm -->
 <!doctype html>
 <html>
@@ -195,7 +201,7 @@
                                   buttons: ['Confirmar', 'Cancelar']
                               }, function(ret, err){
                                   if( ret ){
-                                       if(ret.buttonIndex == 1){
+                                       if(ret.buttonIndex == 2){
                                          app.doCancel(order, ret.text);
                                        }
                                   }else{

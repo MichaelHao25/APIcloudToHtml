@@ -1,7 +1,7 @@
 <!--
  * @since: 2020-11-27 21:10:19
  * @LastAuthor: Blue
- * @lastTime: 2020-11-29 01:17:10
+ * @lastTime: 2020-12-02 20:37:21
  * @FilePath: /A6001888506312/html/goods_detail_frm.html
 -->
 <!-- 模型frm -->
@@ -619,7 +619,11 @@
                         const address = new URL(window.location.href);
                         address.searchParams.set('id', resp.data.id)
                         address.searchParams.set('shareCode', resp.data.shareCode)
-                        address.pathname = 'A6001888506312/web_adapter/adapter.html';
+                        if(resp.data.shareCode==''){
+                            // debugger
+                            that.isShare = false;
+                        }
+                        address.pathname = '';
                         that.shareAddress = address.toString();
                         resp.data.spec_group_info = resp.data.spec_group_info.map(function (item) {
                             item.spec_option_group = item.spec_option_group.split('_').sort().toString();

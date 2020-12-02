@@ -431,6 +431,9 @@
                 return window.frameElement ? parseFloat(window.frameElement.parentNode.style.height) : document.documentElement.clientHeight || document.body.clientHeight;
             if ("pageParam" === f) {
                 // debugger
+                // if(api.frameName.includes('order_status_')){
+                //     debugger
+                // }
                 var key = api.frameName || api.winName;
                 var value = localStorage.getItem(key);
                 if (value === 'undefined') {
@@ -707,6 +710,12 @@
                         We.style.overflow = "auto",
                         We.style["-webkit-overflow-scrolling"] = "touch",
                         Ce !== we && (We.style.visibility = "hidden");
+                        // debugger
+                        if ('{}' !== JSON.stringify(fe.pageParam)) {
+                            // 有参数
+                            localStorage.setItem(fe.name, JSON.stringify(fe.pageParam));
+                            fe.pageParam = {};
+                        }
                     var ve = E()
                         , re = n({
                             url: K = e(fe.url),

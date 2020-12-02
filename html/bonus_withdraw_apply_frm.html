@@ -1,7 +1,7 @@
 <!--
  * @since: 2020-10-24 12:04:02
  * @LastAuthor: Blue
- * @lastTime: 2020-11-06 22:01:44
+ * @lastTime: 2020-11-29 18:24:57
  * @FilePath: /A6001888506312/html/bonus_withdraw_apply_frm.html
 -->
 <!-- 模型frm -->
@@ -123,7 +123,7 @@
                                 title: 'Introduzca la contraseña de pago',
                                 buttons: ['Confirmar', 'Cancelar']
                             }, function(ret, err) {
-                                if (ret.buttonIndex == 1 && ret.text) {
+                                if (ret.buttonIndex == 2 && ret.text) {
                                     $util.ajax({
                                         url: 'api_bonus/bonus_applys/save',
                                         data: {

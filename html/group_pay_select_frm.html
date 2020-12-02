@@ -296,7 +296,7 @@
                     type: 'password',
                     buttons: ['Confirmar', 'Cancelar']
                 }, function(ret, err) {
-                    if (ret.buttonIndex == 1) {
+                    if (ret.buttonIndex == 2) {
                         $util.ajax({
                             url: 'api_orders/pay/money',
                             data: {

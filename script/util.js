@@ -12,8 +12,8 @@
         return n;
     }
     var _u = {};
-    // _u.origin = 'https://www.177pinche.com/';
-    _u.origin = 'http://t.0lz.net/';
+    _u.origin = 'https://www.177pinche.com/';
+    // _u.origin = 'http://t.0lz.net/';
 
     // _u.origin = 'http://177pinche.yznt.com/';
 
@@ -138,18 +138,24 @@
                         _u.log(options.url)
                         reject(ret)
                     } else if (ret.code == 1) {
-                        if (ret.data.length < 10) {
-                            // 当数据小于10
-                            window.miniRefresh && (window.miniRefresh.options.up.isLock = true);
-                            window.miniRefresh && window.miniRefresh.endUpLoading(true);
-                        } else {
-                            if (ret.data instanceof Object) {
-                                // 判断data是否为object
-                                if (ret.data.applys < 10) {
-                                    // ret.data.applys
+                        console.log(options.url);
+                        // 针对特定的地址做兼容
+                        if ('api_drp/commission_applys/lists' === options.url) {
+                            if (ret.data.applys) {
+                                let arr = ret.data.applys || [];
+                                if (arr.length < 10) {
                                     window.miniRefresh && (window.miniRefresh.options.up.isLock = true);
                                     window.miniRefresh && window.miniRefresh.endUpLoading(true);
                                 }
+                            } else {
+                                window.miniRefresh && (window.miniRefresh.options.up.isLock = false);
+                            }
+                        } else {
+                            // commission_applys/lists
+                            if (ret.data.length < 10) {
+                                // 当数据小于10
+                                window.miniRefresh && (window.miniRefresh.options.up.isLock = true);
+                                window.miniRefresh && window.miniRefresh.endUpLoading(true);
                             } else {
                                 window.miniRefresh && (window.miniRefresh.options.up.isLock = false);
                             }
@@ -276,11 +282,12 @@
     };
     //吐丝弹窗
     _u.toast = function (msg) {
-        api.toast({
-            msg: msg,
-            duration: 2000,
-            location: 'middle'
-        });
+        alert(msg);
+        // api.toast({
+        //     msg: msg,
+        //     duration: 2000,
+        //     location: 'middle'
+        // });
     };
 
     //校验手机号码
