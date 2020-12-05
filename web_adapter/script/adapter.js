@@ -578,6 +578,8 @@
                     // 有参数
                     localStorage.setItem(T.name, JSON.stringify(Ee));
                     Ee = {};
+                }else{
+                    localStorage.removeItem(T.name);
                 }
                 var oe = h(ee)
                     , re = n({
@@ -715,6 +717,8 @@
                             // 有参数
                             localStorage.setItem(fe.name, JSON.stringify(fe.pageParam));
                             fe.pageParam = {};
+                        }else{
+                            localStorage.removeItem(T.name);
                         }
                     var ve = E()
                         , re = n({
@@ -792,6 +796,8 @@
                     // 有参数
                     localStorage.setItem(T.name, JSON.stringify(Ee));
                     Ee = {};
+                }else{
+                    localStorage.removeItem(T.name);
                 }
                 var Te = g(oe = h(U.winName), Ne)
                     , re = n({
