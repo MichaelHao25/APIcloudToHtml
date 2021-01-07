@@ -1,7 +1,7 @@
 <!--
  * @since: 2020-11-27 21:10:19
  * @LastAuthor: Blue
- * @lastTime: 2020-12-02 20:37:21
+ * @lastTime: 2020-12-24 00:49:06
  * @FilePath: /A6001888506312/html/goods_detail_frm.html
 -->
 <!-- 模型frm -->
@@ -131,12 +131,29 @@
             -ms-user-select: text;
             user-select: text;
         }
+
+        .fb_iframe_widget span {
+            width: 50% !important;
+            height: 40px !important;
+        }
+
+        .fb_iframe_widget iframe {
+            visibility: visible !important;
+        }
     </style>
 </head>
 
 <body>
     <div id="minirefresh" class="minirefresh-wrap">
         <div class="minirefresh-scroll">
+            <!-- test -->
+            <!-- <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"
+                 data-size="small"><a target="_blank"
+                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                   class="fb-xfbml-parse-ignore">分享</a></div> -->
+            <!-- test -->
+
+
             <div id="app">
                 <!-- 返回按钮 -->
                 <i class="aui-iconfont aui-icon-left returni" onclick="api.closeWin();" id="header" style></i>
@@ -174,7 +191,16 @@
                         <span class="aui-font-size-14">$</span>
                         <span v-text="goods.sell_price"></span>
                         <div style="float: right;font-size: 24px;" v-if="isShare" @click="openLayout()">Compartir</div>
+                        <!-- <div class="fb-share-button" v-if="isShare" :data-href="shareAddress" data-layout="button">
+                        </div> -->
+                        <div class="fb-share-button" v-if="isShare" :data-href="shareAddress" data-layout="button_count"
+                             data-size="small"><a target="_blank"
+                               href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+                               class="fb-xfbml-parse-ignore"></a></div>
+
+
                     </h1>
+
                     <h3 v-text="goods.name" class="aui-padded-t-5"></h3>
                     <div>{{goods.id}}</div>
                     <p class="aui-font-size-12 aui-padded-t-5" v-text="goods.intro"></p>
@@ -272,6 +298,24 @@
         </div>
     </div>
 
+    <!-- <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    Your share button code -->
+    <div id="fb-root"></div>
+
+    <!-- <script async defer crossorigin="anonymous"
+     src=""
+     nonce="8skz9piy"></script> -->
+    <script>
+
+    </script>
 </body>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/jquery-3.5.1.min.js"></script>
@@ -281,7 +325,7 @@
 <script type="text/javascript" src="../script/fastclick.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script> -->
 <script type="text/javascript">
-    
+
     window.addEventListener('load', function () {
         FastClick.attach(document.body);
     }, false);
@@ -380,6 +424,7 @@
                     }
                     if (!$util.user) {
                         $util.toast('Por favor.');
+                        localStorage.setItem('redirect','true');
                         setTimeout(function () {
                             $util.openWindow('login_win')
                         }, 500);
@@ -619,11 +664,25 @@
                         const address = new URL(window.location.href);
                         address.searchParams.set('id', resp.data.id)
                         address.searchParams.set('shareCode', resp.data.shareCode)
-                        if(resp.data.shareCode==''){
+                        if (resp.data.shareCode == '') {
                             // debugger
                             that.isShare = false;
+                        } else {
+                            setTimeout(() => {
+                                //facebook
+                                var script = document.createElement('script');
+                                script.async = true;
+                                script.defer = true;
+                                script.crossOrigin = "anonymous";
+                                script.nonce = "8skz9piy"
+                                script.src = "https://connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v9.0&appId=144601276206792&autoLogAppEvents=1"
+                                document.body.appendChild(script)
+                                //facebook
+                            }, 500);
                         }
                         address.pathname = '';
+
+
                         that.shareAddress = address.toString();
                         resp.data.spec_group_info = resp.data.spec_group_info.map(function (item) {
                             item.spec_option_group = item.spec_option_group.split('_').sort().toString();
@@ -712,7 +771,6 @@
                 if ($util.user) {
                     this.isShare = true;
                 }
-
             }
         })
         api.setRefreshHeaderInfo({

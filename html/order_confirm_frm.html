@@ -285,7 +285,7 @@
                     // orderData[0].goods_id 当前商品的id
                     // 使用地址栏携带的id和当前商品进行比对,如果OK的话就附带上邀请码不OK的话就不附带了.
                     let result = JSON.parse(localStorage.getItem('global_shareInfo'))
-                    if (result.id) {
+                    if (result) {
                         if(orderData[0].goods_id==result.id){
                             apiData.shareCode = result.shareCode;
                         }

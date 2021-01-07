@@ -3,7 +3,6 @@
  * Copyright (c) 2014 apicloud.com
  */
 
-
 // let script = document.createElement('script');
 // script.src = "../web_adapter/script/adapter.js";
 // document.body.appendChild(script);
