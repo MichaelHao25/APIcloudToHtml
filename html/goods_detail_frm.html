@@ -513,6 +513,7 @@
                 addLastConfirm() {
                     if (!$util.user) {
                         $util.toast('Por favor.');
+                        localStorage.setItem('redirect','true');
                         setTimeout(function () {
                             $util.openWindow('login_win')
                         }, 500);

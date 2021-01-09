@@ -31,6 +31,13 @@
     <!-- facebook -->
     <title></title>
     <script>
+      var version = localStorage.getItem("flag_version");
+      var target_version  = '0.1.1'
+      if (version===target_version) {
+        localStorage.clear();
+        localStorage.setItem("flag_version", target_version);
+        window.location.reload();
+      }
       // http://192.168.123.112:8080/A6001888506312/web_adapter/adapter.html?goodsId=925&id=925&shareCode=OTI1OjUzMTQ%3D
       let url = new URL(location.href);
       if (url.searchParams.get("id")) {
