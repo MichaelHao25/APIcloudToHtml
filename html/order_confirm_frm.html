@@ -477,9 +477,8 @@
                 },
             },
             mounted: function () {
-                debugger
-                this.goodsList = api.pageParam.goodsList ? api.pageParam.goodsList : [];
-                this.isDiscountGoods = api.pageParam.isDiscountGoods ? api.pageParam.isDiscountGoods : '';
+                this.goodsList = api.pageParam.goodsList ? JSON.parse(api.pageParam.goodsList) : [];
+                this.isDiscountGoods = api.pageParam.isDiscountGoods ? JSON.parse(api.pageParam.isDiscountGoods) : '';
                 this.getDefaultAddress()
             }
         });
